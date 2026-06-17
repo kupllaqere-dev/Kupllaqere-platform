@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  compiler: {
+    styledComponents: true,
+  },
+  images: {
+    remotePatterns: [],
+  },
 };
 
 export default nextConfig;
