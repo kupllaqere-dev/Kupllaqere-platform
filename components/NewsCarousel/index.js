@@ -68,34 +68,41 @@ const ArrowBtn = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: ${({ theme }) => theme.radii.full};
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: none;
+  border: none;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
   z-index: 2;
-  backdrop-filter: blur(8px);
+  opacity: ${({ $visible }) => ($visible ? 0.35 : 0)};
+  padding: 0 8px;
 
-  ${({ $side }) => ($side === 'left' ? 'left: 16px;' : 'right: 16px;')}
+  ${({ $side }) => ($side === 'left' ? 'left: 8px;' : 'right: 8px;')}
+
+  svg {
+    height: 72px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+    transition: filter ${({ theme }) => theme.transitions.fast};
+  }
+
+  &:hover svg {
+    filter: drop-shadow(0 2px 8px rgba(200, 121, 65, 0.8));
+  }
 
   &:hover {
-    background: rgba(200, 121, 65, 0.65);
-    border-color: rgba(200, 121, 65, 0.52);
-    transform: translateY(-50%) scale(1.08);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    svg { height: 56px; }
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
-    ${({ $side }) => ($side === 'left' ? 'left: 8px;' : 'right: 8px;')}
+    svg { height: 40px; }
   }
 `;
 
@@ -175,9 +182,13 @@ const SkeletonWrap = styled.div`
 /* ─── Inner component that uses the hook (needs count > 0) ───── */
 function Slides({ items }) {
   const { current, next, prev, go } = useCarousel(items.length, 5000);
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <CarouselWrapper>
+    <CarouselWrapper
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <ProgressBar key={current} />
 
       <SlideTrack>
@@ -191,8 +202,16 @@ function Slides({ items }) {
 
       {items.length > 1 && (
         <>
-          <ArrowBtn $side="left" onClick={prev} aria-label="Previous">‹</ArrowBtn>
-          <ArrowBtn $side="right" onClick={next} aria-label="Next">›</ArrowBtn>
+          <ArrowBtn $side="left" $visible={hovered} onClick={prev} aria-label="Previous">
+            <svg viewBox="0 0 44 100" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="40,2 4,50 40,98" />
+            </svg>
+          </ArrowBtn>
+          <ArrowBtn $side="right" $visible={hovered} onClick={next} aria-label="Next">
+            <svg viewBox="0 0 44 100" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="4,2 40,50 4,98" />
+            </svg>
+          </ArrowBtn>
 
           <DotsRow>
             {items.map((item, i) => (

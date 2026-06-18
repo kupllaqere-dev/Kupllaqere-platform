@@ -159,7 +159,7 @@ const NotificationBtn = styled.button`
   position: relative;
   width: 36px;
   height: 36px;
-  border-radius: ${({ theme }) => theme.radii.md};
+  border-radius: ${({ theme }) => theme.radii.full};
   display: flex;
   align-items: center;
   justify-content: center;
