@@ -46,7 +46,7 @@ const AvatarRing = styled.div`
   height: 96px;
   border-radius: ${({ theme }) => theme.radii.full};
   border: 3px solid ${({ theme }) => theme.colors.accent.violet};
-  box-shadow: 0 0 24px rgba(139,92,246,0.4);
+  box-shadow: 0 0 24px rgba(200,121,65,0.4);
   background: ${({ theme }) => theme.colors.bg.elevated};
   overflow: hidden;
   margin-top: -48px;
@@ -90,7 +90,7 @@ const RoleBadge = styled.span`
   letter-spacing: 0.05em;
   color: ${({ theme }) => theme.colors.accent.violet};
   background: ${({ theme }) => theme.colors.accent.violetAlpha};
-  border: 1px solid rgba(139,92,246,0.3);
+  border: 1px solid rgba(200,121,65,0.3);
   border-radius: ${({ theme }) => theme.radii.full};
   padding: 0.25rem 0.75rem;
 `;
@@ -218,7 +218,7 @@ export default function UserProfilePage() {
                 <Avatar
                   src={profile.platform_avatar || null}
                   username={displayName}
-                  color="#8b5cf6"
+                  color="#c87941"
                   size="96px"
                   fontSize="2rem"
                 />

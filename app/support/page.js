@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
@@ -6,13 +6,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { submitTicket } from '@/lib/supportApi';
 
-/* ─── Animations ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* ─── Layout ─────────────────────────────────────────────────── */
+/* â”€â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -35,7 +35,7 @@ const Body = styled.div`
   }
 `;
 
-/* ─── Sidebar ────────────────────────────────────────────────── */
+/* â”€â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Sidebar = styled.aside`
   width: 220px;
   flex-shrink: 0;
@@ -96,24 +96,24 @@ const SidebarSubItem = styled.button`
   font-weight: ${({ theme }) => theme.typography.weights.medium};
   color: ${({ theme }) => theme.colors.accent.violet};
   background: ${({ theme }) => theme.colors.accent.violetAlpha};
-  border: 1px solid rgba(139,92,246,0.2);
+  border: 1px solid rgba(200,121,65,0.2);
   cursor: pointer;
   text-align: left;
   transition: all ${({ theme }) => theme.transitions.fast};
   margin-top: 4px;
 
   &:hover {
-    background: rgba(139,92,246,0.15);
+    background: rgba(200,121,65,0.15);
   }
 `;
 
-/* ─── Main ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Main = styled.main`
   flex: 1;
   min-width: 0;
 `;
 
-/* ─── Breadcrumbs ────────────────────────────────────────────── */
+/* â”€â”€â”€ Breadcrumbs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const BreadcrumbsNav = styled.nav`
   display: flex;
   align-items: center;
@@ -159,7 +159,7 @@ const BreadcrumbCurrent = styled.span`
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
-/* ─── Section card ───────────────────────────────────────────── */
+/* â”€â”€â”€ Section card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Card = styled.div`
   background: ${({ theme }) => theme.colors.bg.surface};
   border: 1px solid ${({ theme }) => theme.colors.border.medium};
@@ -186,7 +186,7 @@ const SectionSubtitle = styled.p`
   margin-bottom: 32px;
 `;
 
-/* ─── Category grid ──────────────────────────────────────────── */
+/* â”€â”€â”€ Category grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const CategoryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -214,7 +214,7 @@ const CategoryCard = styled.button`
     border-color: ${({ theme }) => theme.colors.border.accent};
     background: ${({ theme }) => theme.colors.accent.violetAlpha};
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+    box-shadow: 0 8px 24px rgba(200, 121, 65, 0.15);
   }
 `;
 
@@ -234,7 +234,7 @@ const CategoryDesc = styled.span`
   line-height: 1.5;
 `;
 
-/* ─── Ticket form ────────────────────────────────────────────── */
+/* â”€â”€â”€ Ticket form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const TicketFormWrap = styled.div`
   animation: ${fadeIn} 0.2s ease;
 `;
@@ -290,11 +290,11 @@ const SubmitBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(200, 121, 65, 0.3);
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    box-shadow: 0 6px 20px rgba(200, 121, 65, 0.45);
   }
 
   &:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -330,17 +330,17 @@ const ErrorBanner = styled.div`
   animation: ${fadeIn} 0.25s ease;
 `;
 
-/* ─── Data ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const CATEGORIES = [
-  { key: 'account',   icon: '👤', label: 'My Account',       desc: 'Username, password, profile settings, and account access.' },
-  { key: 'bug',       icon: '🐛', label: 'Bug Reports',      desc: 'Report a bug or unexpected behaviour in the game.' },
-  { key: 'technical', icon: '⚙️', label: 'Technical Issues', desc: 'Connectivity problems, crashes, or performance issues.' },
-  { key: 'payment',   icon: '💳', label: 'Payment Issues',   desc: 'Billing, refunds, missing currency, or purchase problems.' },
+  { key: 'account',   icon: 'ðŸ‘¤', label: 'My Account',       desc: 'Username, password, profile settings, and account access.' },
+  { key: 'bug',       icon: 'ðŸ›', label: 'Bug Reports',      desc: 'Report a bug or unexpected behaviour in the game.' },
+  { key: 'technical', icon: 'âš™ï¸', label: 'Technical Issues', desc: 'Connectivity problems, crashes, or performance issues.' },
+  { key: 'payment',   icon: 'ðŸ’³', label: 'Payment Issues',   desc: 'Billing, refunds, missing currency, or purchase problems.' },
 ];
 
 const MAX_LENGTH = 2000;
 
-/* ─── Ticket form ────────────────────────────────────────────── */
+/* â”€â”€â”€ Ticket form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function TicketForm({ category, onBack }) {
   const [message, setMessage]       = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -370,7 +370,7 @@ function TicketForm({ category, onBack }) {
 
       <form onSubmit={handleSubmit}>
         <TextArea
-          placeholder={`Describe your ${category.label.toLowerCase()} issue in as much detail as possible…`}
+          placeholder={`Describe your ${category.label.toLowerCase()} issue in as much detail as possibleâ€¦`}
           value={message}
           onChange={e => setMessage(e.target.value.slice(0, MAX_LENGTH))}
           disabled={submitting || submitted}
@@ -379,14 +379,14 @@ function TicketForm({ category, onBack }) {
 
         {submitted && (
           <SuccessBanner>
-            ✅ Your ticket has been submitted. Our support team will get back to you soon.
+            âœ… Your ticket has been submitted. Our support team will get back to you soon.
           </SuccessBanner>
         )}
-        {error && <ErrorBanner>⚠️ {error}</ErrorBanner>}
+        {error && <ErrorBanner>âš ï¸ {error}</ErrorBanner>}
 
         {!submitted && (
           <SubmitBtn type="submit" disabled={!message.trim() || submitting}>
-            {submitting ? 'Sending…' : 'Submit Ticket'}
+            {submitting ? 'Sendingâ€¦' : 'Submit Ticket'}
           </SubmitBtn>
         )}
       </form>
@@ -394,11 +394,11 @@ function TicketForm({ category, onBack }) {
   );
 }
 
-/* ─── Page ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function SupportPage() {
   const [activeCategory, setActiveCategory] = useState(null);
 
-  /* ── breadcrumbs ── */
+  /* â”€â”€ breadcrumbs â”€â”€ */
   const crumbs = activeCategory
     ? [
         { label: 'Home',    href: '/' },
@@ -435,7 +435,7 @@ export default function SupportPage() {
           <BreadcrumbsNav aria-label="breadcrumb">
             {crumbs.map((crumb, i) => (
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                {i > 0 && <BreadcrumbSep>›</BreadcrumbSep>}
+                {i > 0 && <BreadcrumbSep>â€º</BreadcrumbSep>}
                 {crumb.href ? (
                   <BreadcrumbLink href={crumb.href}>{crumb.label}</BreadcrumbLink>
                 ) : crumb.onClick ? (

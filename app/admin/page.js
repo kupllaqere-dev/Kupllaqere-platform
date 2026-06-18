@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
@@ -10,13 +10,13 @@ import { createCompetition } from '@/lib/competitionsApi';
 import { fetchTickets, replyToTicket, updateTicketStatus } from '@/lib/supportApi';
 import { fetchCodes, createCode, toggleCode } from '@/lib/codesApi';
 
-/* ─── Animations ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* ─── Layout ─────────────────────────────────────────────────── */
+/* â”€â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -39,7 +39,7 @@ const Body = styled.div`
   }
 `;
 
-/* ─── Sidebar ────────────────────────────────────────────────── */
+/* â”€â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Sidebar = styled.aside`
   width: 220px;
   flex-shrink: 0;
@@ -101,7 +101,7 @@ const SidebarItem = styled.button`
   }
 `;
 
-/* ─── Main content ───────────────────────────────────────────── */
+/* â”€â”€â”€ Main content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Main = styled.main`
   flex: 1;
   min-width: 0;
@@ -195,7 +195,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-/* ─── Image upload ───────────────────────────────────────────── */
+/* â”€â”€â”€ Image upload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const ImagesRow = styled.div`
   display: grid;
   grid-template-columns: ${({ $cols }) => `repeat(${$cols}, 1fr)`};
@@ -290,7 +290,7 @@ const RemoveBtn = styled.button`
   }
 `;
 
-/* ─── Actions ────────────────────────────────────────────────── */
+/* â”€â”€â”€ Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const ActionRow = styled.div`
   display: flex;
   align-items: center;
@@ -328,11 +328,11 @@ const SubmitBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(200, 121, 65, 0.3);
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    box-shadow: 0 6px 20px rgba(200, 121, 65, 0.45);
   }
 
   &:disabled {
@@ -371,7 +371,7 @@ const ErrorBanner = styled.div`
   animation: ${fadeIn} 0.25s ease;
 `;
 
-/* ─── Access denied ──────────────────────────────────────────── */
+/* â”€â”€â”€ Access denied â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Denied = styled.div`
   flex: 1;
   display: flex;
@@ -384,7 +384,7 @@ const Denied = styled.div`
   padding: 64px 24px;
 `;
 
-/* ─── Image upload sub-component ─────────────────────────────── */
+/* â”€â”€â”€ Image upload sub-component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ImageUpload({ label, hint, value, onChange }) {
   const inputRef = useRef(null);
 
@@ -411,11 +411,11 @@ function ImageUpload({ label, hint, value, onChange }) {
         {value ? (
           <>
             <UploadPreview src={value.url} alt={label} />
-            <RemoveBtn onClick={handleRemove} type="button">✕</RemoveBtn>
+            <RemoveBtn onClick={handleRemove} type="button">âœ•</RemoveBtn>
           </>
         ) : (
           <UploadPlaceholder>
-            <UploadIcon>🖼️</UploadIcon>
+            <UploadIcon>ðŸ–¼ï¸</UploadIcon>
             <UploadLabel>Click to upload</UploadLabel>
             <UploadHint>{hint || 'PNG, JPG, WEBP up to 10 MB'}</UploadHint>
           </UploadPlaceholder>
@@ -425,7 +425,7 @@ function ImageUpload({ label, hint, value, onChange }) {
   );
 }
 
-/* ─── News form ──────────────────────────────────────────────── */
+/* â”€â”€â”€ News form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function NewsForm() {
   const [image, setImage]         = useState(null);
   const [title, setTitle]         = useState('');
@@ -480,7 +480,7 @@ function NewsForm() {
             <Label>Title</Label>
             <Input
               type="text"
-              placeholder="Article title…"
+              placeholder="Article titleâ€¦"
               value={title}
               onChange={e => setTitle(e.target.value)}
               maxLength={200}
@@ -490,7 +490,7 @@ function NewsForm() {
           <Field>
             <Label>Content</Label>
             <TextArea
-              placeholder="Write the news content here…"
+              placeholder="Write the news content hereâ€¦"
               value={text}
               onChange={e => setText(e.target.value)}
             />
@@ -498,16 +498,16 @@ function NewsForm() {
         </FieldGroup>
 
         {submitted && (
-          <SuccessBanner>✅ News article published successfully!</SuccessBanner>
+          <SuccessBanner>âœ… News article published successfully!</SuccessBanner>
         )}
         {error && (
-          <ErrorBanner>⚠️ {error}</ErrorBanner>
+          <ErrorBanner>âš ï¸ {error}</ErrorBanner>
         )}
 
         <ActionRow>
           <ResetBtn type="button" onClick={reset} disabled={submitting}>Clear</ResetBtn>
           <SubmitBtn type="submit" disabled={!valid || submitting}>
-            {submitting ? 'Publishing…' : 'Publish'}
+            {submitting ? 'Publishingâ€¦' : 'Publish'}
           </SubmitBtn>
         </ActionRow>
       </form>
@@ -515,7 +515,7 @@ function NewsForm() {
   );
 }
 
-/* ─── Date row (two columns) ─────────────────────────────────── */
+/* â”€â”€â”€ Date row (two columns) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DateRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -532,7 +532,7 @@ const DateHint = styled.p`
   margin-top: 4px;
 `;
 
-/* ─── Competitions form ──────────────────────────────────────── */
+/* â”€â”€â”€ Competitions form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function CompetitionsForm() {
   const [image, setImage]           = useState(null);
   const [title, setTitle]           = useState('');
@@ -600,7 +600,7 @@ function CompetitionsForm() {
             <Label>Title</Label>
             <Input
               type="text"
-              placeholder="Competition title…"
+              placeholder="Competition titleâ€¦"
               value={title}
               onChange={e => setTitle(e.target.value)}
               maxLength={200}
@@ -610,7 +610,7 @@ function CompetitionsForm() {
           <Field>
             <Label>Description</Label>
             <TextArea
-              placeholder="Describe the competition, theme, rules…"
+              placeholder="Describe the competition, theme, rulesâ€¦"
               value={description}
               onChange={e => setDesc(e.target.value)}
             />
@@ -649,16 +649,16 @@ function CompetitionsForm() {
         </FieldGroup>
 
         {submitted && (
-          <SuccessBanner>✅ Competition created successfully!</SuccessBanner>
+          <SuccessBanner>âœ… Competition created successfully!</SuccessBanner>
         )}
         {error && (
-          <ErrorBanner>⚠️ {error}</ErrorBanner>
+          <ErrorBanner>âš ï¸ {error}</ErrorBanner>
         )}
 
         <ActionRow>
           <ResetBtn type="button" onClick={reset} disabled={submitting}>Clear</ResetBtn>
           <SubmitBtn type="submit" disabled={!valid || submitting}>
-            {submitting ? 'Creating…' : 'Create Competition'}
+            {submitting ? 'Creatingâ€¦' : 'Create Competition'}
           </SubmitBtn>
         </ActionRow>
       </form>
@@ -666,7 +666,7 @@ function CompetitionsForm() {
   );
 }
 
-/* ─── Support section styled components ─────────────────────── */
+/* â”€â”€â”€ Support section styled components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const TicketList = styled.div`
   display: flex;
   flex-direction: column;
@@ -711,7 +711,7 @@ const TicketCategory = styled.span`
   border-radius: ${({ theme }) => theme.radii.full};
   background: ${({ theme }) => theme.colors.accent.violetAlpha};
   color: ${({ theme }) => theme.colors.accent.violet};
-  border: 1px solid rgba(139,92,246,0.3);
+  border: 1px solid rgba(200,121,65,0.3);
   text-transform: capitalize;
 `;
 
@@ -721,7 +721,7 @@ const TicketStatus = styled.span`
   padding: 3px 10px;
   border-radius: ${({ theme }) => theme.radii.full};
   background: ${({ $s, theme }) =>
-    $s === 'open'    ? 'rgba(34,211,238,0.1)' :
+    $s === 'open'    ? 'rgba(42,172,142,0.1)' :
     $s === 'replied' ? theme.colors.accent.emeraldAlpha :
     'rgba(255,255,255,0.05)'};
   color: ${({ $s, theme }) =>
@@ -729,8 +729,8 @@ const TicketStatus = styled.span`
     $s === 'replied' ? theme.colors.accent.emerald :
     theme.colors.text.muted};
   border: 1px solid ${({ $s }) =>
-    $s === 'open'    ? 'rgba(34,211,238,0.3)' :
-    $s === 'replied' ? 'rgba(52,211,153,0.3)' :
+    $s === 'open'    ? 'rgba(42,172,142,0.3)' :
+    $s === 'replied' ? 'rgba(74,173,106,0.3)' :
     'transparent'};
   text-transform: capitalize;
 `;
@@ -756,7 +756,7 @@ const TicketTime = styled.span`
   flex-shrink: 0;
 `;
 
-/* ─── Ticket detail panel ────────────────────────────────────── */
+/* â”€â”€â”€ Ticket detail panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DetailWrap = styled.div`
   margin-top: 20px;
   background: ${({ theme }) => theme.colors.bg.elevated};
@@ -849,9 +849,9 @@ const SendReplyBtn = styled.button`
   border: none;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(200, 121, 65, 0.3);
 
-  &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45); }
+  &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200, 121, 65, 0.45); }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 `;
 
@@ -861,8 +861,8 @@ const EmptyTickets = styled.div`
   color: ${({ theme }) => theme.colors.text.muted};
 `;
 
-/* ─── Support section component ──────────────────────────────── */
-const CATEGORY_ICONS = { account: '👤', bug: '🐛', technical: '⚙️', payment: '💳' };
+/* â”€â”€â”€ Support section component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+const CATEGORY_ICONS = { account: 'ðŸ‘¤', bug: 'ðŸ›', technical: 'âš™ï¸', payment: 'ðŸ’³' };
 
 function SupportSection() {
   const [tickets, setTickets]         = useState([]);
@@ -919,8 +919,8 @@ function SupportSection() {
       <FormTitle>Support Tickets</FormTitle>
       <FormSubtitle>Review and respond to player support requests.</FormSubtitle>
 
-      {loading && <EmptyTickets>Loading tickets…</EmptyTickets>}
-      {!loading && error && <EmptyTickets>⚠️ {error}</EmptyTickets>}
+      {loading && <EmptyTickets>Loading ticketsâ€¦</EmptyTickets>}
+      {!loading && error && <EmptyTickets>âš ï¸ {error}</EmptyTickets>}
       {!loading && !error && tickets.length === 0 && (
         <EmptyTickets>No tickets yet.</EmptyTickets>
       )}
@@ -936,7 +936,7 @@ function SupportSection() {
               <TicketMeta>
                 <TicketHeader>
                   <TicketCategory>
-                    {CATEGORY_ICONS[ticket.category] || '📩'} {ticket.category}
+                    {CATEGORY_ICONS[ticket.category] || 'ðŸ“©'} {ticket.category}
                   </TicketCategory>
                   <TicketStatus $s={ticket.status}>{ticket.status || 'open'}</TicketStatus>
                   <TicketUser>
@@ -954,7 +954,7 @@ function SupportSection() {
       {selected && (
         <DetailWrap>
           <DetailTitle>
-            {CATEGORY_ICONS[selected.category] || '📩'} {selected.category} —{' '}
+            {CATEGORY_ICONS[selected.category] || 'ðŸ“©'} {selected.category} â€”{' '}
             {selected.platform_username || selected.user_email || 'Unknown player'}
           </DetailTitle>
           <DetailMessage>{selected.message}</DetailMessage>
@@ -962,7 +962,7 @@ function SupportSection() {
           <ReplyBox>
             <ReplyLabel>Reply to player</ReplyLabel>
             <AdminReplyTextArea
-              placeholder="Write your reply here…"
+              placeholder="Write your reply hereâ€¦"
               value={reply}
               onChange={e => setReply(e.target.value)}
               disabled={sending}
@@ -977,12 +977,12 @@ function SupportSection() {
                 <option value="closed">Mark as closed</option>
               </StatusSelect>
               <SendReplyBtn onClick={handleSendReply} disabled={!reply.trim() || sending}>
-                {sending ? 'Sending…' : 'Send Reply'}
+                {sending ? 'Sendingâ€¦' : 'Send Reply'}
               </SendReplyBtn>
             </ReplyRow>
 
-            {replyDone  && <SuccessBanner>✅ Reply sent successfully.</SuccessBanner>}
-            {replyError && <ErrorBanner>⚠️ {replyError}</ErrorBanner>}
+            {replyDone  && <SuccessBanner>âœ… Reply sent successfully.</SuccessBanner>}
+            {replyError && <ErrorBanner>âš ï¸ {replyError}</ErrorBanner>}
           </ReplyBox>
         </DetailWrap>
       )}
@@ -990,7 +990,7 @@ function SupportSection() {
   );
 }
 
-/* ─── Codes section styled components ───────────────────────── */
+/* â”€â”€â”€ Codes section styled components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const CodesTable = styled.div`
   display: flex;
   flex-direction: column;
@@ -1047,7 +1047,7 @@ const LisChip = styled.span`
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
   color: ${({ theme }) => theme.colors.accent.gold};
   background: ${({ theme }) => theme.colors.accent.goldAlpha};
-  border: 1px solid rgba(251,191,36,0.25);
+  border: 1px solid rgba(232,184,74,0.25);
   border-radius: ${({ theme }) => theme.radii.full};
   padding: 3px 10px;
 `;
@@ -1065,7 +1065,7 @@ const StatusPill = styled.span`
   color: ${({ $enabled, theme }) =>
     $enabled ? theme.colors.accent.emerald : theme.colors.text.muted};
   border: 1px solid ${({ $enabled }) =>
-    $enabled ? 'rgba(52,211,153,0.3)' : 'transparent'};
+    $enabled ? 'rgba(74,173,106,0.3)' : 'transparent'};
 `;
 
 const CodeDate = styled.span`
@@ -1081,15 +1081,15 @@ const ToggleBtn = styled.button`
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
   border: 1px solid ${({ $enabled, theme }) =>
-    $enabled ? 'rgba(251,113,133,0.4)' : 'rgba(52,211,153,0.4)'};
+    $enabled ? 'rgba(196,64,64,0.4)' : 'rgba(74,173,106,0.4)'};
   color: ${({ $enabled, theme }) =>
     $enabled ? theme.colors.accent.rose : theme.colors.accent.emerald};
   background: ${({ $enabled }) =>
-    $enabled ? 'rgba(251,113,133,0.08)' : 'rgba(52,211,153,0.08)'};
+    $enabled ? 'rgba(196,64,64,0.08)' : 'rgba(74,173,106,0.08)'};
 
   &:hover:not(:disabled) {
     background: ${({ $enabled }) =>
-      $enabled ? 'rgba(251,113,133,0.18)' : 'rgba(52,211,153,0.18)'};
+      $enabled ? 'rgba(196,64,64,0.18)' : 'rgba(74,173,106,0.18)'};
   }
 
   &:disabled { opacity: 0.45; cursor: not-allowed; }
@@ -1101,7 +1101,7 @@ const SectionDivider = styled.hr`
   margin: 28px 0 24px;
 `;
 
-/* ─── Codes section component ────────────────────────────────── */
+/* â”€â”€â”€ Codes section component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function CodesSection() {
   const [codes, setCodes]           = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -1144,7 +1144,7 @@ function CodesSection() {
       const updated = await toggleCode(code.id);
       setCodes(prev => prev.map(c => c.id === updated.id ? updated : c));
     } catch {
-      // silently ignore — state stays as-is
+      // silently ignore â€” state stays as-is
     } finally {
       setToggling(null);
     }
@@ -1187,12 +1187,12 @@ function CodesSection() {
           </DateRow>
         </FieldGroup>
 
-        {createDone  && <SuccessBanner>✅ Code created successfully!</SuccessBanner>}
-        {createError && <ErrorBanner>⚠️ {createError}</ErrorBanner>}
+        {createDone  && <SuccessBanner>âœ… Code created successfully!</SuccessBanner>}
+        {createError && <ErrorBanner>âš ï¸ {createError}</ErrorBanner>}
 
         <ActionRow>
           <SubmitBtn type="submit" disabled={!newCode.trim() || creating}>
-            {creating ? 'Creating…' : 'Create Code'}
+            {creating ? 'Creatingâ€¦' : 'Create Code'}
           </SubmitBtn>
         </ActionRow>
       </form>
@@ -1200,8 +1200,8 @@ function CodesSection() {
       <SectionDivider />
 
       {/* Codes table */}
-      {loading && <EmptyTickets>Loading codes…</EmptyTickets>}
-      {!loading && error && <EmptyTickets>⚠️ {error}</EmptyTickets>}
+      {loading && <EmptyTickets>Loading codesâ€¦</EmptyTickets>}
+      {!loading && error && <EmptyTickets>âš ï¸ {error}</EmptyTickets>}
       {!loading && !error && codes.length === 0 && (
         <EmptyTickets>No codes yet. Create one above.</EmptyTickets>
       )}
@@ -1218,9 +1218,9 @@ function CodesSection() {
           {codes.map(c => (
             <CodeRow key={c.id}>
               <CodeText>{c.code}</CodeText>
-              <LisChip>✦ {c.lis_amount}</LisChip>
+              <LisChip>âœ¦ {c.lis_amount}</LisChip>
               <StatusPill $enabled={c.enabled}>
-                {c.enabled ? '● Active' : '○ Disabled'}
+                {c.enabled ? 'â— Active' : 'â—‹ Disabled'}
               </StatusPill>
               <CodeDate>{formatDate(c.created_at)}</CodeDate>
               <ToggleBtn
@@ -1228,7 +1228,7 @@ function CodesSection() {
                 onClick={() => handleToggle(c)}
                 disabled={toggling === c.id}
               >
-                {toggling === c.id ? '…' : c.enabled ? 'Disable' : 'Enable'}
+                {toggling === c.id ? 'â€¦' : c.enabled ? 'Disable' : 'Enable'}
               </ToggleBtn>
             </CodeRow>
           ))}
@@ -1238,15 +1238,15 @@ function CodesSection() {
   );
 }
 
-/* ─── Sidebar items ──────────────────────────────────────────── */
+/* â”€â”€â”€ Sidebar items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SECTIONS = [
-  { key: 'news',         label: '📰 News' },
-  { key: 'competitions', label: '🏆 Competitions' },
-  { key: 'support',      label: '🎧 Support' },
-  { key: 'codes',        label: '🎟 Codes' },
+  { key: 'news',         label: 'ðŸ“° News' },
+  { key: 'competitions', label: 'ðŸ† Competitions' },
+  { key: 'support',      label: 'ðŸŽ§ Support' },
+  { key: 'codes',        label: 'ðŸŽŸ Codes' },
 ];
 
-/* ─── Page ───────────────────────────────────────────────────── */
+/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function AdminPage() {
   const { user, profile, loading } = useAuth();
   const router = useRouter();
@@ -1262,7 +1262,7 @@ export default function AdminPage() {
     return (
       <PageWrap>
         <Header />
-        <Denied>🔒 Access restricted</Denied>
+        <Denied>ðŸ”’ Access restricted</Denied>
         <Footer />
       </PageWrap>
     );

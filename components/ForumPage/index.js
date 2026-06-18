@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -13,15 +13,15 @@ import { fetchPosts } from '@/lib/forumApi';
 
 const CATEGORIES = [
   { label: 'All',           color: null },
-  { label: 'General',       color: '#8b5cf6' },
-  { label: 'Tips & Guides', color: '#22d3ee' },
-  { label: 'Events',        color: '#fb7185' },
-  { label: 'Trading',       color: '#fbbf24' },
-  { label: 'Clans',         color: '#fb923c' },
-  { label: 'Help & Support',color: '#34d399' },
+  { label: 'General',       color: '#c87941' },
+  { label: 'Tips & Guides', color: '#2aac8e' },
+  { label: 'Events',        color: '#c44040' },
+  { label: 'Trading',       color: '#e8b84a' },
+  { label: 'Clans',         color: '#4aad6a' },
+  { label: 'Help & Support',color: '#4aad6a' },
 ];
 
-const AVATAR_COLORS = ['#8b5cf6','#22d3ee','#fb7185','#fbbf24','#34d399','#fb923c','#a78bfa','#67e8f9'];
+const AVATAR_COLORS = ['#c87941','#2aac8e','#c44040','#e8b84a','#4aad6a','#4aad6a','#e09a58','#4ec9a8'];
 
 function avatarColor(name = '') {
   let h = 0;
@@ -95,7 +95,7 @@ const CategoryTab = styled.button`
   border: 1.5px solid ${({ $active, theme, $color }) =>
     $active ? ($color || theme.colors.accent.violet) : theme.colors.border.default};
   background: ${({ $active, $color }) =>
-    $active ? ($color ? `${$color}22` : 'rgba(139,92,246,0.15)') : 'transparent'};
+    $active ? ($color ? `${$color}22` : 'rgba(200,121,65,0.15)') : 'transparent'};
   color: ${({ $active, $color, theme }) =>
     $active ? ($color || theme.colors.accent.violetLight) : theme.colors.text.muted};
   font-size: ${({ theme }) => theme.typography.sizes.xs};
@@ -133,7 +133,7 @@ const ThreadCard = styled(GlassCard)`
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 3px;
-    background: ${({ $color }) => $color || '#8b5cf6'};
+    background: ${({ $color }) => $color || '#c87941'};
     border-radius: 3px 0 0 3px;
     opacity: 0;
     transition: opacity ${({ theme }) => theme.transitions.fast};

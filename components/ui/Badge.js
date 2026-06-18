@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled from 'styled-components';
 
 const Badge = styled.span`
@@ -10,9 +10,9 @@ const Badge = styled.span`
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: ${({ $color }) => $color ? `${$color}22` : 'rgba(139,92,246,0.15)'};
-  color: ${({ $color }) => $color || '#a78bfa'};
-  border: 1px solid ${({ $color }) => $color ? `${$color}44` : 'rgba(139,92,246,0.3)'};
+  background: ${({ $color }) => $color ? `${$color}22` : 'rgba(200,121,65,0.15)'};
+  color: ${({ $color }) => $color || '#e09a58'};
+  border: 1px solid ${({ $color }) => $color ? `${$color}44` : 'rgba(200,121,65,0.3)'};
   white-space: nowrap;
 `;
 

@@ -118,9 +118,9 @@ const CompTitle = styled.h1`
 `;
 
 const statusVariants = {
-  upcoming:     css`background: ${({ theme }) => theme.colors.accent.violetAlpha}; color: ${({ theme }) => theme.colors.accent.violet}; border-color: rgba(139,92,246,0.3);`,
-  registration: css`background: rgba(34,211,238,0.1); color: ${({ theme }) => theme.colors.accent.cyan}; border-color: rgba(34,211,238,0.3);`,
-  voting:       css`background: rgba(251,191,36,0.1); color: ${({ theme }) => theme.colors.accent.gold}; border-color: rgba(251,191,36,0.3);`,
+  upcoming:     css`background: ${({ theme }) => theme.colors.accent.violetAlpha}; color: ${({ theme }) => theme.colors.accent.violet}; border-color: rgba(200,121,65,0.3);`,
+  registration: css`background: rgba(42,172,142,0.1); color: ${({ theme }) => theme.colors.accent.cyan}; border-color: rgba(42,172,142,0.3);`,
+  voting:       css`background: rgba(232,184,74,0.1); color: ${({ theme }) => theme.colors.accent.gold}; border-color: rgba(232,184,74,0.3);`,
   closed:       css`background: transparent; color: ${({ theme }) => theme.colors.text.muted}; border-color: ${({ theme }) => theme.colors.border.subtle};`,
 };
 
@@ -231,7 +231,7 @@ const RemoveBtn = styled.button`
   color: ${({ theme }) => theme.colors.accent.rose};
   font-size: 0.7rem; display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2; transition: all ${({ theme }) => theme.transitions.fast};
-  &:hover { background: rgba(251,113,133,0.15); border-color: ${({ theme }) => theme.colors.accent.rose}; }
+  &:hover { background: rgba(196,64,64,0.15); border-color: ${({ theme }) => theme.colors.accent.rose}; }
 `;
 
 /* ─── Buttons / feedback ───────────────────────────────────────── */
@@ -245,8 +245,8 @@ const SubmitBtn = styled.button`
   background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent.violet}, ${({ theme }) => theme.colors.accent.violetDark});
   border: none; cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: 0 4px 14px rgba(139,92,246,0.3);
-  &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(139,92,246,0.45); }
+  box-shadow: 0 4px 14px rgba(200,121,65,0.3);
+  &:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,121,65,0.45); }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 `;
 
@@ -254,7 +254,7 @@ const SuccessBanner = styled.div`
   display: flex; align-items: center; gap: 10px;
   padding: 14px 18px; border-radius: ${({ theme }) => theme.radii.lg};
   background: ${({ theme }) => theme.colors.accent.emeraldAlpha};
-  border: 1px solid rgba(52,211,153,0.25);
+  border: 1px solid rgba(74,173,106,0.25);
   color: ${({ theme }) => theme.colors.accent.emerald};
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   font-weight: ${({ theme }) => theme.typography.weights.medium};
@@ -264,7 +264,7 @@ const SuccessBanner = styled.div`
 const ErrorBanner = styled.div`
   display: flex; align-items: center; gap: 10px;
   padding: 12px 16px; border-radius: ${({ theme }) => theme.radii.lg};
-  background: rgba(251,113,133,0.1); border: 1px solid rgba(251,113,133,0.25);
+  background: rgba(196,64,64,0.1); border: 1px solid rgba(196,64,64,0.25);
   color: ${({ theme }) => theme.colors.accent.rose};
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   margin-top: 14px; animation: ${fadeIn} 0.25s ease;
@@ -337,8 +337,8 @@ const LikeBtn = styled.button`
   gap: 5px;
   padding: 4px 10px;
   border-radius: ${({ theme }) => theme.radii.full};
-  border: 1px solid ${({ $liked, theme }) => $liked ? 'rgba(251,113,133,0.4)' : theme.colors.border.subtle};
-  background: ${({ $liked }) => $liked ? 'rgba(251,113,133,0.12)' : 'transparent'};
+  border: 1px solid ${({ $liked, theme }) => $liked ? 'rgba(196,64,64,0.4)' : theme.colors.border.subtle};
+  background: ${({ $liked }) => $liked ? 'rgba(196,64,64,0.12)' : 'transparent'};
   color: ${({ $liked, theme }) => $liked ? theme.colors.accent.rose : theme.colors.text.muted};
   font-size: ${({ theme }) => theme.typography.sizes.xs};
   font-weight: ${({ theme }) => theme.typography.weights.medium};
@@ -347,8 +347,8 @@ const LikeBtn = styled.button`
   flex-shrink: 0;
 
   &:hover:not(:disabled) {
-    border-color: rgba(251,113,133,0.4);
-    background: rgba(251,113,133,0.1);
+    border-color: rgba(196,64,64,0.4);
+    background: rgba(196,64,64,0.1);
     color: ${({ theme }) => theme.colors.accent.rose};
   }
 `;

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
@@ -86,8 +86,8 @@ const ArrowBtn = styled.button`
   ${({ $side }) => ($side === 'left' ? 'left: 16px;' : 'right: 16px;')}
 
   &:hover {
-    background: rgba(139, 92, 246, 0.6);
-    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(200, 121, 65, 0.65);
+    border-color: rgba(200, 121, 65, 0.52);
     transform: translateY(-50%) scale(1.08);
   }
 
@@ -118,7 +118,7 @@ const Dot = styled.button`
   height: 6px;
   border-radius: 3px;
   background: ${({ $active }) =>
-    $active ? '#8b5cf6' : 'rgba(255, 255, 255, 0.3)'};
+    $active ? '#c87941' : 'rgba(255, 255, 255, 0.3)'};
   width: ${({ $active }) => ($active ? '22px' : '6px')};
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.normal};
@@ -138,7 +138,7 @@ const ProgressBar = styled.div`
   top: 0;
   left: 0;
   height: 3px;
-  background: #8b5cf6;
+  background: #c87941;
   animation: progress 5s linear;
   z-index: 3;
 

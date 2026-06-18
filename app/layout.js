@@ -1,17 +1,18 @@
-import { Inter, Rajdhani } from 'next/font/google';
+import { Raleway, Cinzel } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 
-const inter = Inter({
+const raleway = Raleway({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-raleway',
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-const rajdhani = Rajdhani({
+const cinzel = Cinzel({
   subsets: ['latin'],
+  variable: '--font-cinzel',
   weight: ['400', '600', '700'],
-  variable: '--font-rajdhani',
   display: 'swap',
 });
 
@@ -24,7 +25,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${rajdhani.variable}`}>
+    <html lang="en" className={`${raleway.variable} ${cinzel.variable}`}>
       <body>
         <Providers>
           {children}

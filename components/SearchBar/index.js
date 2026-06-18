@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
@@ -34,12 +34,6 @@ const InputWrap = styled.div`
   }
 `;
 
-const SearchIcon = styled.span`
-  font-size: 0.7rem;
-  color: ${({ theme }) => theme.colors.text.muted};
-  flex-shrink: 0;
-  line-height: 1;
-`;
 
 const Input = styled.input`
   flex: 1;
@@ -183,7 +177,6 @@ export default function SearchBar({ fullWidth = false, onNavigate }) {
   return (
     <Wrap ref={wrapRef} $fullWidth={fullWidth}>
       <InputWrap $fullWidth={fullWidth}>
-        <SearchIcon>🔍</SearchIcon>
         <Input
           value={query}
           onChange={e => setQuery(e.target.value)}
@@ -208,7 +201,7 @@ export default function SearchBar({ fullWidth = false, onNavigate }) {
                 <Avatar
                   src={null}
                   username={r.platform_username || r.name || '?'}
-                  color="#8b5cf6"
+                  color="#c87941"
                   size="32px"
                   fontSize="0.7rem"
                 />

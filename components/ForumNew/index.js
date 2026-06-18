@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,12 +12,12 @@ import { useAuth } from '@/features/auth/AuthProvider';
 import { createPost } from '@/lib/forumApi';
 
 const CATEGORIES = [
-  { label: 'General',       color: '#8b5cf6' },
-  { label: 'Tips & Guides', color: '#22d3ee' },
-  { label: 'Events',        color: '#fb7185' },
-  { label: 'Trading',       color: '#fbbf24' },
-  { label: 'Clans',         color: '#fb923c' },
-  { label: 'Help & Support',color: '#34d399' },
+  { label: 'General',       color: '#c87941' },
+  { label: 'Tips & Guides', color: '#2aac8e' },
+  { label: 'Events',        color: '#c44040' },
+  { label: 'Trading',       color: '#e8b84a' },
+  { label: 'Clans',         color: '#4aad6a' },
+  { label: 'Help & Support',color: '#4aad6a' },
 ];
 
 /* ─── Styled ──────────────────────────────────────────────────── */
@@ -201,7 +201,7 @@ export default function ForumNew() {
         title: title.trim(),
         body:  body.trim(),
         category,
-        category_color: selectedCategory?.color || '#8b5cf6',
+        category_color: selectedCategory?.color || '#c87941',
       });
       router.push(`/forums/${post.id}`);
     } catch (err) {

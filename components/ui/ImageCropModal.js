@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useRef, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { PrimaryButton, GhostButton } from '@/components/ui/Button';
@@ -137,7 +137,7 @@ const ZoomSlider = styled.input`
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.accent.violet};
     cursor: pointer;
-    box-shadow: 0 0 6px rgba(139, 92, 246, 0.55);
+    box-shadow: 0 0 6px rgba(200, 121, 65, 0.55);
   }
   &::-moz-range-thumb {
     width: 15px;
@@ -146,7 +146,7 @@ const ZoomSlider = styled.input`
     background: ${({ theme }) => theme.colors.accent.violet};
     cursor: pointer;
     border: none;
-    box-shadow: 0 0 6px rgba(139, 92, 246, 0.55);
+    box-shadow: 0 0 6px rgba(200, 121, 65, 0.55);
   }
 `;
 

@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 import styled from 'styled-components';
 
 const AvatarWrapper = styled.div`
   width: ${({ $size }) => $size || '36px'};
   height: ${({ $size }) => $size || '36px'};
   border-radius: ${({ theme }) => theme.radii.full};
-  background: ${({ $color }) => $color || 'linear-gradient(135deg, #8b5cf6, #22d3ee)'};
+  background: ${({ $color }) => $color || 'linear-gradient(135deg, #c87941, #2aac8e)'};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
@@ -19,16 +19,19 @@ const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
   z-index: ${({ theme }) => theme.zIndex.header};
-  background: linear-gradient(180deg, rgba(5, 5, 14, 0.92) 0%, rgba(7, 7, 15, 0.82) 100%);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(180deg, rgba(12, 10, 7, 0.97) 0%, rgba(12, 10, 7, 0.88) 100%);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border-bottom: 1px solid rgba(200, 168, 120, 0.10);
   overflow: visible;
 `;
 
 /* ─── 3-column grid ──────────────────────────────────────────── */
 const HeaderInner = styled.div`
-  padding: 0 24px;
+  max-width: 1260px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
   height: 68px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -37,6 +40,10 @@ const HeaderInner = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: auto 1fr auto;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 0 16px;
   }
 `;
 
@@ -71,11 +78,11 @@ const LogoImg = styled.img`
   transition:
     transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1),
     filter    250ms ease;
-  filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.35));
+  filter: drop-shadow(0 4px 20px rgba(200, 121, 65, 0.38));
 
   &:hover {
     transform: translateY(10px) scale(1.13);
-    filter: drop-shadow(0 6px 28px rgba(139, 92, 246, 0.6));
+    filter: drop-shadow(0 6px 28px rgba(200, 121, 65, 0.60));
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -100,6 +107,22 @@ const RightNav = styled.div`
   }
 `;
 
+/* Auth pinned to the far right of the full-width header, outside the letterbox */
+const AuthFixed = styled.div`
+  position: absolute;
+  right: 28px;
+  top: calc(50% + 8px);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing['2']};
+  z-index: 1;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
+  }
+`;
+
 const AuthGroup = styled.div`
   display: flex;
   align-items: center;
@@ -115,7 +138,7 @@ const NavLink = styled(Link)`
   border-radius: ${({ theme }) => theme.radii.md};
   font-size: ${({ theme }) => theme.typography.sizes.md};
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
-  color: rgba(226, 232, 240, 0.82);
+  color: rgba(245, 236, 224, 0.80);
   letter-spacing: 0.01em;
   transition: all ${({ theme }) => theme.transitions.fast};
 
@@ -220,7 +243,7 @@ const DropdownMenu = styled.div`
   top: calc(100% + 8px);
   right: 0;
   min-width: 180px;
-  background: rgba(12, 12, 24, 0.98);
+  background: rgba(20, 16, 10, 0.98);
   border: 1px solid ${({ theme }) => theme.colors.border.default};
   border-radius: ${({ theme }) => theme.radii.xl};
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -291,7 +314,7 @@ const NotifDropdown = styled.div`
   top: calc(100% + 8px);
   right: 0;
   width: 320px;
-  background: rgba(12, 12, 24, 0.98);
+  background: rgba(20, 16, 10, 0.98);
   border: 1px solid ${({ theme }) => theme.colors.border.default};
   border-radius: ${({ theme }) => theme.radii.xl};
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -335,7 +358,7 @@ const NotifItem = styled.button`
   width: 100%;
   padding: 12px 14px;
   background: ${({ $unread, theme }) =>
-    $unread ? 'rgba(139, 92, 246, 0.07)' : 'transparent'};
+    $unread ? 'rgba(200, 121, 65, 0.09)' : 'transparent'};
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border.subtle};
   cursor: pointer;
@@ -346,7 +369,7 @@ const NotifItem = styled.button`
 
   &:hover {
     background: ${({ $unread }) =>
-      $unread ? 'rgba(139, 92, 246, 0.13)' : 'rgba(255,255,255,0.04)'};
+      $unread ? 'rgba(200, 121, 65, 0.14)' : 'rgba(196,181,253,0.04)'};
   }
 `;
 
@@ -430,7 +453,7 @@ const MobileMenu = styled.div`
   top: 68px;
   left: 0;
   right: 0;
-  background: rgba(10, 10, 22, 0.98);
+  background: rgba(20, 16, 10, 0.98);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border.default};
   padding: ${({ theme }) => theme.spacing['4']};
@@ -613,7 +636,7 @@ export default function Header() {
         aria-expanded={dropdownOpen}
         aria-haspopup="true"
       >
-        <Avatar src={avatarSrc} username={avatarSrc ? displayName : ''} color="#8b5cf6" size="28px" fontSize="0.75rem" />
+        <Avatar src={avatarSrc} username={avatarSrc ? displayName : ''} color="#c87941" size="28px" fontSize="0.75rem" />
         <Username>{displayName}</Username>
         <ChevronIcon $open={dropdownOpen}>▼</ChevronIcon>
       </UserChip>
@@ -646,6 +669,7 @@ export default function Header() {
   const authNode = !loading && (
     user ? (
       <UserSection>
+        <SearchBar />
         {notifDropdown}
         {userDropdown}
       </UserSection>
@@ -660,6 +684,9 @@ export default function Header() {
   return (
     <>
       <HeaderWrapper>
+        {/* ── Auth: pinned to viewport right edge, outside letterbox ── */}
+        <AuthFixed>{authNode}</AuthFixed>
+
         <HeaderInner>
 
           {/* ── Desktop left nav ── */}
@@ -686,13 +713,11 @@ export default function Header() {
             </LogoWrap>
           </MobileLogoWrap>
 
-          {/* ── Desktop right nav + auth ── */}
+          {/* ── Desktop right nav ── */}
           <RightNav>
             {rightLinks.map(link => (
               <NavLink key={link.href} href={link.href}>{link.label}</NavLink>
             ))}
-            <SearchBar />
-            <AuthGroup>{authNode}</AuthGroup>
           </RightNav>
 
           {/* ── Mobile right: auth ── */}

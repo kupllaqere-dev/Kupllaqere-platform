@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled, { keyframes } from 'styled-components';
@@ -7,13 +7,13 @@ import { GhostButton, PrimaryButton } from '@/components/ui/Button';
 import Header from '@/components/Header';
 import ImageCropModal from '@/components/ui/ImageCropModal';
 
-/* ─── Animations ────────────────────────────────────────────── */
+/* â”€â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* ─── Layout ─────────────────────────────────────────────────── */
+/* â”€â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Page = styled.div`
   min-height: 100vh;
   padding: 3rem 1.5rem;
@@ -25,7 +25,7 @@ const Inner = styled.div`
   animation: ${fadeUp} 0.4s ease;
 `;
 
-/* ─── Profile card ────────────────────────────────────────────── */
+/* â”€â”€â”€ Profile card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Card = styled.div`
   background: ${({ theme }) => theme.colors.bg.surface};
   border: 1px solid ${({ theme }) => theme.colors.border.default};
@@ -34,7 +34,7 @@ const Card = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.lg};
 `;
 
-/* ─── Banner ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const BannerEditHint = styled.div`
   position: absolute;
   inset: 0;
@@ -70,7 +70,7 @@ const ProfileTop = styled.div`
   position: relative;
 `;
 
-/* ─── Avatar ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ Avatar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const AvatarEditHint = styled.div`
   position: absolute;
   inset: 0;
@@ -105,7 +105,7 @@ const AvatarRing = styled.div`
   height: 96px;
   border-radius: ${({ theme }) => theme.radii.full};
   border: 3px solid ${({ theme }) => theme.colors.accent.violet};
-  box-shadow: 0 0 24px rgba(139,92,246,0.4);
+  box-shadow: 0 0 24px rgba(200,121,65,0.4);
   background: ${({ theme }) => theme.colors.bg.elevated};
   overflow: hidden;
   display: flex;
@@ -169,12 +169,12 @@ const RoleBadge = styled.span`
   letter-spacing: 0.05em;
   color: ${({ theme }) => theme.colors.accent.violet};
   background: ${({ theme }) => theme.colors.accent.violetAlpha};
-  border: 1px solid rgba(139,92,246,0.3);
+  border: 1px solid rgba(200,121,65,0.3);
   border-radius: ${({ theme }) => theme.radii.full};
   padding: 0.25rem 0.75rem;
 `;
 
-/* ─── Upload status ───────────────────────────────────────────── */
+/* â”€â”€â”€ Upload status â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const UploadStatus = styled.p`
   font-size: ${({ theme }) => theme.typography.sizes.xs};
   color: ${({ $err, theme }) => $err ? theme.colors.accent.rose : theme.colors.text.muted};
@@ -182,7 +182,7 @@ const UploadStatus = styled.p`
   font-style: italic;
 `;
 
-/* ─── Bio ─────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Bio â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const BioSection = styled.div`
   margin-top: 1rem;
 `;
@@ -250,7 +250,7 @@ const BioActions = styled.div`
   margin-top: 0.5rem;
 `;
 
-/* ─── No character notice ─────────────────────────────────────── */
+/* â”€â”€â”€ No character notice â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const NoCharCard = styled.div`
   margin-top: 1.5rem;
   background: ${({ theme }) => theme.colors.bg.elevated};
@@ -271,7 +271,7 @@ const NoCharSub = styled.p`
   color: ${({ theme }) => theme.colors.text.muted};
 `;
 
-/* ─── Loading skeleton ────────────────────────────────────────── */
+/* â”€â”€â”€ Loading skeleton â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Skeleton = styled.div`
   min-height: 60vh;
   display: flex;
@@ -284,7 +284,7 @@ const Skeleton = styled.div`
 const BIO_MAX = 200;
 const ACCEPTED = 'image/jpeg,image/png,image/webp,image/gif,image/avif,image/bmp,image/tiff';
 
-/* ─── Component ──────────────────────────────────────────────── */
+/* â”€â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function ProfilePage() {
   const { user, profile, loading, updateBio, updateAvatar, updateBanner } = useAuth();
   const router = useRouter();
@@ -344,10 +344,10 @@ export default function ProfilePage() {
     setUploadErr('');
     const { error } = await (target === 'avatar' ? updateAvatar(blob) : updateBanner(blob));
     setUploading(false);
-    if (error) setUploadErr(error.message || 'Upload failed — please try again.');
+    if (error) setUploadErr(error.message || 'Upload failed â€” please try again.');
   }
 
-  if (loading || !user) return <Skeleton>Loading…</Skeleton>;
+  if (loading || !user) return <Skeleton>Loadingâ€¦</Skeleton>;
 
   const hasCharacter = !!(profile?.name);
   const platformName = profile?.platform_username || user.email?.split('@')[0] || 'Player';
@@ -363,14 +363,14 @@ export default function ProfilePage() {
       <Page>
         <Inner>
           <Card>
-            {/* ── Banner ── */}
+            {/* â”€â”€ Banner â”€â”€ */}
             <BannerArea $img={bannerSrc} onClick={() => openFilePicker('banner')} title="Click to change banner">
               {bannerSrc && <BannerEditHint>Edit banner</BannerEditHint>}
               {!bannerSrc && <BannerEditHint style={{ opacity: 0.7 }}>Add banner image</BannerEditHint>}
             </BannerArea>
 
             <ProfileTop>
-              {/* ── Avatar ── */}
+              {/* â”€â”€ Avatar â”€â”€ */}
               <AvatarWrap onClick={() => openFilePicker('avatar')} title="Click to change avatar">
                 <AvatarRing>
                   {avatarSrc
@@ -383,7 +383,7 @@ export default function ProfilePage() {
 
               {(uploading || uploadErr) && (
                 <UploadStatus $err={!!uploadErr}>
-                  {uploading ? 'Uploading…' : uploadErr}
+                  {uploading ? 'Uploadingâ€¦' : uploadErr}
                 </UploadStatus>
               )}
 
@@ -404,14 +404,14 @@ export default function ProfilePage() {
                 )}
               </ProfileMeta>
 
-              {/* ── Bio ── */}
+              {/* â”€â”€ Bio â”€â”€ */}
               <BioSection>
                 {editingBio ? (
                   <>
                     <BioTextarea
                       value={bioText}
                       onChange={e => setBioText(e.target.value)}
-                      placeholder="Write a short bio…"
+                      placeholder="Write a short bioâ€¦"
                       maxLength={BIO_MAX + 10}
                     />
                     <BioActions>
@@ -421,12 +421,12 @@ export default function ProfilePage() {
                         onClick={handleSaveBio}
                         disabled={bioSaving || bioOver}
                       >
-                        {bioSaving ? 'Saving…' : 'Save'}
+                        {bioSaving ? 'Savingâ€¦' : 'Save'}
                       </PrimaryButton>
                       <GhostButton size="sm" onClick={() => { setEditingBio(false); setBioText(displayBio); setBioError(''); }}>
                         Cancel
                       </GhostButton>
-                      {bioError && <span style={{ fontSize: '0.75rem', color: '#fb7185' }}>{bioError}</span>}
+                      {bioError && <span style={{ fontSize: '0.75rem', color: '#c44040' }}>{bioError}</span>}
                     </BioActions>
                   </>
                 ) : (
@@ -455,7 +455,7 @@ export default function ProfilePage() {
         </Inner>
       </Page>
 
-      {/* ── Hidden file inputs ── */}
+      {/* â”€â”€ Hidden file inputs â”€â”€ */}
       <input
         ref={avatarInputRef}
         type="file"
@@ -471,7 +471,7 @@ export default function ProfilePage() {
         onChange={e => handleFileSelected(e, 'banner')}
       />
 
-      {/* ── Crop modals ── */}
+      {/* â”€â”€ Crop modals â”€â”€ */}
       <ImageCropModal
         open={cropTarget === 'avatar'}
         onClose={() => setCropTarget(null)}

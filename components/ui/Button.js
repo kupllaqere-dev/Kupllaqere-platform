@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled, { css } from 'styled-components';
 
 const baseStyles = css`
@@ -67,7 +67,7 @@ export const SecondaryButton = styled.button`
   border-color: ${({ theme }) => theme.colors.border.medium};
 
   &:hover {
-    background: #1e1e38;
+    background: ${({ theme }) => theme.colors.bg.elevated};
     border-color: ${({ theme }) => theme.colors.border.accent};
     color: ${({ theme }) => theme.colors.accent.violetLight};
     transform: translateY(-1px);
@@ -122,7 +122,7 @@ export const GoldButton = styled.button`
   &:hover {
     transform: translateY(-1px);
     filter: brightness(1.1);
-    box-shadow: 0 6px 28px rgba(251, 191, 36, 0.5);
+    box-shadow: 0 6px 28px rgba(232, 184, 74, 0.48);
   }
 
   &:active {

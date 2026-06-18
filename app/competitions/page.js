@@ -158,9 +158,9 @@ const CompTitle = styled.h2`
 `;
 
 const statusVariants = {
-  upcoming:     css`background: ${({ theme }) => theme.colors.accent.violetAlpha}; color: ${({ theme }) => theme.colors.accent.violet}; border-color: rgba(139,92,246,0.3);`,
-  registration: css`background: rgba(34,211,238,0.1); color: ${({ theme }) => theme.colors.accent.cyan}; border-color: rgba(34,211,238,0.3);`,
-  voting:       css`background: rgba(251,191,36,0.1); color: ${({ theme }) => theme.colors.accent.gold}; border-color: rgba(251,191,36,0.3);`,
+  upcoming:     css`background: ${({ theme }) => theme.colors.accent.violetAlpha}; color: ${({ theme }) => theme.colors.accent.violet}; border-color: rgba(200,121,65,0.3);`,
+  registration: css`background: rgba(42,172,142,0.1); color: ${({ theme }) => theme.colors.accent.cyan}; border-color: rgba(42,172,142,0.3);`,
+  voting:       css`background: rgba(232,184,74,0.1); color: ${({ theme }) => theme.colors.accent.gold}; border-color: rgba(232,184,74,0.3);`,
   closed:       css`background: transparent; color: ${({ theme }) => theme.colors.text.muted}; border-color: ${({ theme }) => theme.colors.border.subtle};`,
 };
 

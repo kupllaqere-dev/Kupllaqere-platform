@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled, { keyframes } from 'styled-components';
 import { useState, useEffect } from 'react';
 import GlassCard from '@/components/ui/Card';
@@ -8,8 +8,8 @@ import { redeemCode } from '@/lib/codesApi';
 import { useAuth } from '@/features/auth/AuthProvider';
 
 const pulse = keyframes`
-  0%, 100% { box-shadow: 0 0 16px rgba(251,191,36,0.3); }
-  50%       { box-shadow: 0 0 32px rgba(251,191,36,0.6); }
+  0%, 100% { box-shadow: 0 0 16px rgba(232,184,74,0.32); }
+  50%       { box-shadow: 0 0 32px rgba(232,184,74,0.62); }
 `;
 
 const shimmer = keyframes`
@@ -34,7 +34,7 @@ const SectionTitle = styled.h2`
 
 const RewardsCard = styled(GlassCard)`
   padding: ${({ theme }) => theme.spacing['6']} ${({ theme }) => theme.spacing['8']};
-  background: linear-gradient(135deg, #16120a 0%, #0e0e1c 100%);
+  background: linear-gradient(135deg, #14100a 0%, #100c08 100%);
   border-color: ${({ theme }) => theme.colors.border.gold};
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
@@ -49,7 +49,7 @@ const RewardsCard = styled(GlassCard)`
     top: -60px; right: -60px;
     width: 200px; height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(232,184,74,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -146,7 +146,7 @@ const RewardBox = styled.button`
   background: ${({ $dim, $claimed }) =>
     $dim ? 'rgba(255,255,255,0.02)' :
     $claimed ? 'rgba(255,255,255,0.03)' :
-    'rgba(251,191,36,0.06)'};
+    'rgba(232,184,74,0.06)'};
   opacity: ${({ $dim }) => $dim ? 0.6 : 1};
   cursor: ${({ $dim, $claimed }) => ($dim || $claimed) ? 'default' : 'pointer'};
   transition: background 0.15s, border-color 0.15s;
@@ -154,7 +154,7 @@ const RewardBox = styled.button`
 
   ${({ $dim, $claimed }) => !$dim && !$claimed && `
     &:hover {
-      background: rgba(251,191,36,0.13);
+      background: rgba(232,184,74,0.13);
       border-color: gold;
     }
   `}
@@ -242,7 +242,7 @@ const CodeInput = styled.input`
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.border.gold};
-    box-shadow: 0 0 0 3px rgba(251,191,36,0.08);
+    box-shadow: 0 0 0 3px rgba(232,184,74,0.08);
   }
 `;
 

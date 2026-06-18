@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import Badge from '@/components/ui/Badge';
 import { SecondaryButton } from '@/components/ui/Button';
 import { fetchPosts } from '@/lib/forumApi';
 
-const AVATAR_COLORS = ['#8b5cf6','#22d3ee','#fb7185','#fbbf24','#34d399','#fb923c','#a78bfa','#67e8f9'];
+const AVATAR_COLORS = ['#c87941','#2aac8e','#c44040','#e8b84a','#4aad6a','#4aad6a','#e09a58','#4ec9a8'];
 
 function avatarColor(name = '') {
   let h = 0;
@@ -80,7 +80,7 @@ const ThreadCard = styled(GlassCard)`
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 3px;
-    background: ${({ $accentColor }) => $accentColor || '#8b5cf6'};
+    background: ${({ $accentColor }) => $accentColor || '#c87941'};
     border-radius: 3px 0 0 3px;
     opacity: 0;
     transition: opacity ${({ theme }) => theme.transitions.fast};

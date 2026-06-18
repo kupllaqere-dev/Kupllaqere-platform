@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import GlassCard from '@/components/ui/Card';
@@ -113,7 +113,7 @@ const StatusDot = styled.span`
   border-radius: 50%;
   background: ${({ $online, theme }) => $online ? theme.colors.accent.emerald : theme.colors.text.muted};
   flex-shrink: 0;
-  box-shadow: ${({ $online }) => $online ? '0 0 6px rgba(52,211,153,0.6)' : 'none'};
+  box-shadow: ${({ $online }) => $online ? '0 0 6px rgba(74,173,106,0.6)' : 'none'};
 `;
 
 const RatingBadge = styled.div`

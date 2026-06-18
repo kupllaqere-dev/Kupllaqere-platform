@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled, { css } from 'styled-components';
 
 const GlassCard = styled.div`
@@ -15,7 +15,7 @@ const GlassCard = styled.div`
       background: ${theme.colors.bg.elevated};
       border-color: ${theme.colors.border.accent};
       transform: translateY(-2px);
-      box-shadow: ${theme.shadows.lg}, 0 0 0 1px rgba(139, 92, 246, 0.1);
+      box-shadow: ${theme.shadows.lg}, 0 0 0 1px rgba(200, 121, 65, 0.12);
     }
 
     &:active {
@@ -29,7 +29,7 @@ const GlassCard = styled.div`
 
   ${({ $glow }) => $glow && css`
     &:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(139,92,246,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.55), 0 0 28px rgba(124,58,237,0.22);
     }
   `}
 `;

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -284,9 +284,9 @@ const SocialLink = styled.a`
 
   &:hover {
     background: ${({ theme }) => theme.colors.bg.glassHover};
-    border-color: ${({ $color }) => $color || 'rgba(139,92,246,0.4)'};
+    border-color: ${({ $color }) => $color || 'rgba(200,121,65,0.4)'};
     transform: translateX(4px);
-    box-shadow: -4px 0 16px ${({ $color }) => $color ? `${$color}33` : 'rgba(139,92,246,0.15)'};
+    box-shadow: -4px 0 16px ${({ $color }) => $color ? `${$color}33` : 'rgba(200,121,65,0.15)'};
   }
 `;
 
