@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useCart } from '@/features/cart/CartProvider';
+import { LETTERBOX_WIDTH } from '@/components/Layout';
 
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(10px); }
@@ -19,7 +20,7 @@ const PageWrap = styled.div`
 
 const Body = styled.div`
   flex: 1;
-  max-width: 1200px;
+  max-width: ${LETTERBOX_WIDTH};
   width: 100%;
   margin: 0 auto;
   padding: 40px 24px 64px;

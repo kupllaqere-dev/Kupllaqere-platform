@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { fetchNews } from '@/lib/newsApi';
+import { LETTERBOX_WIDTH } from '@/components/Layout';
 
 /* ─── Animations ───────────────────────────────────────────────── */
 const fadeUp = keyframes`
@@ -26,7 +27,7 @@ const PageWrap = styled.div`
 
 const Body = styled.div`
   flex: 1;
-  max-width: 1100px;
+  max-width: ${LETTERBOX_WIDTH};
   width: 100%;
   margin: 0 auto;
   padding: 40px 24px 64px;

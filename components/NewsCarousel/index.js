@@ -50,7 +50,7 @@ const Slide = styled.div`
 const SlideImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 `;
 
@@ -203,12 +203,12 @@ function Slides({ items }) {
       {items.length > 1 && (
         <>
           <ArrowBtn $side="left" $visible={hovered} onClick={prev} aria-label="Previous">
-            <svg viewBox="0 0 44 100" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="-4 -4 52 108" fill="none" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="40,2 4,50 40,98" />
             </svg>
           </ArrowBtn>
           <ArrowBtn $side="right" $visible={hovered} onClick={next} aria-label="Next">
-            <svg viewBox="0 0 44 100" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="-4 -4 52 108" fill="none" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="4,2 40,50 4,98" />
             </svg>
           </ArrowBtn>
