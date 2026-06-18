@@ -54,8 +54,8 @@ const theme = {
 
   typography: {
     fontFamily: {
-      base: "var(--font-raleway, 'Raleway', 'Segoe UI', system-ui, sans-serif)",
-      display: "var(--font-cinzel, 'Cinzel', 'Palatino Linotype', serif)",
+      base: "var(--font-montserrat, 'Montserrat', 'Segoe UI', system-ui, sans-serif)",
+      display: "var(--font-montserrat, 'Montserrat', 'Segoe UI', system-ui, sans-serif)",
     },
     sizes: {
       xs:   '0.6875rem',

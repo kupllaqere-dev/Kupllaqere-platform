@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState, useEffect, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Header from '@/components/Header';
@@ -6,13 +6,13 @@ import Footer from '@/components/Footer';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { fetchNotifications, markRead, markAllRead } from '@/lib/notificationsApi';
 
-/* â”€â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Animations ─────────────────────────────────────────────── */
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* â”€â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Layout ─────────────────────────────────────────────────── */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -31,7 +31,7 @@ const Body = styled.div`
   }
 `;
 
-/* â”€â”€â”€ Page header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page header ────────────────────────────────────────────── */
 const PageTop = styled.div`
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@ const MarkAllBtn = styled.button`
   &:disabled { opacity: 0.4; cursor: not-allowed; }
 `;
 
-/* â”€â”€â”€ Notification list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Notification list ──────────────────────────────────────── */
 const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -136,7 +136,7 @@ const NotifTime = styled.span`
   margin-top: 2px;
 `;
 
-/* â”€â”€â”€ States â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── States ─────────────────────────────────────────────────── */
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 24px;
@@ -153,7 +153,7 @@ const EmptyIcon = styled.div`
   opacity: 0.35;
 `;
 
-/* â”€â”€â”€ Skeleton â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Skeleton ───────────────────────────────────────────────── */
 const shimmer = keyframes`
   0%   { background-position: -600px 0; }
   100% { background-position:  600px 0; }
@@ -182,7 +182,7 @@ const SkeletonLine = styled.div`
   animation: ${shimmer} 1.6s infinite linear;
 `;
 
-/* â”€â”€â”€ Pagination â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Pagination ─────────────────────────────────────────────── */
 const Pagination = styled.div`
   display: flex;
   align-items: center;
@@ -219,17 +219,17 @@ const PageInfo = styled.span`
   padding: 0 4px;
 `;
 
-/* â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Helpers ────────────────────────────────────────────────── */
 const LIMIT = 10;
 
 function formatTime(iso) {
   const d = new Date(iso);
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-    + ' Â· '
+    + ' · '
     + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 }
 
-/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page ───────────────────────────────────────────────────── */
 export default function NotificationsPage() {
   const { user, loading: authLoading } = useAuth();
   const [notifications, setNotifications] = useState([]);
@@ -289,7 +289,7 @@ export default function NotificationsPage() {
           <PageTitle>Notifications</PageTitle>
           {hasUnread && (
             <MarkAllBtn onClick={handleMarkAll} disabled={markingAll}>
-              {markingAll ? 'Markingâ€¦' : 'Mark all as read'}
+              {markingAll ? 'Marking…' : 'Mark all as read'}
             </MarkAllBtn>
           )}
         </PageTop>
@@ -310,7 +310,7 @@ export default function NotificationsPage() {
         {/* Empty */}
         {!loading && notifications.length === 0 && (
           <EmptyState>
-            <EmptyIcon>ðŸ””</EmptyIcon>
+            <EmptyIcon>🔔</EmptyIcon>
             You have no notifications yet.
           </EmptyState>
         )}
@@ -336,23 +336,23 @@ export default function NotificationsPage() {
         {/* Pagination */}
         {!loading && totalPages > 1 && (
           <Pagination>
-            <PageBtn onClick={() => goToPage(page - 1)} disabled={page === 1}>â†</PageBtn>
+            <PageBtn onClick={() => goToPage(page - 1)} disabled={page === 1}>←</PageBtn>
 
             {Array.from({ length: totalPages }, (_, i) => i + 1)
               .filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
               .reduce((acc, p, idx, arr) => {
-                if (idx > 0 && p - arr[idx - 1] > 1) acc.push('â€¦');
+                if (idx > 0 && p - arr[idx - 1] > 1) acc.push('…');
                 acc.push(p);
                 return acc;
               }, [])
               .map((item, i) =>
-                item === 'â€¦'
-                  ? <PageInfo key={`ellipsis-${i}`}>â€¦</PageInfo>
+                item === '…'
+                  ? <PageInfo key={`ellipsis-${i}`}>…</PageInfo>
                   : <PageBtn key={item} $active={item === page} onClick={() => goToPage(item)}>{item}</PageBtn>
               )
             }
 
-            <PageBtn onClick={() => goToPage(page + 1)} disabled={page === totalPages}>â†’</PageBtn>
+            <PageBtn onClick={() => goToPage(page + 1)} disabled={page === totalPages}>→</PageBtn>
           </Pagination>
         )}
       </Body>

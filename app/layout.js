@@ -1,18 +1,11 @@
-import { Raleway, Cinzel } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 
-const raleway = Raleway({
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-raleway',
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-});
-
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  variable: '--font-cinzel',
-  weight: ['400', '600', '700'],
+  variable: '--font-montserrat',
+  weight: ['600'],
   display: 'swap',
 });
 
@@ -25,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${raleway.variable} ${cinzel.variable}`}>
+    <html lang="en" className={montserrat.variable}>
       <body>
         <Providers>
           {children}

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ const fadeUp = keyframes`
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* â”€â”€â”€ Page shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page shell ────────────────────────────────────────────────── */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -47,7 +47,7 @@ const Panel = styled.div`
   }
 `;
 
-/* â”€â”€â”€ Left nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Left nav ──────────────────────────────────────────────────── */
 const Nav = styled.nav`
   width: 220px;
   flex-shrink: 0;
@@ -113,7 +113,7 @@ const NavIcon = styled.span`
   line-height: 1;
 `;
 
-/* â”€â”€â”€ Content area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Content area ──────────────────────────────────────────────── */
 const Content = styled.div`
   flex: 1;
   min-width: 0;
@@ -142,7 +142,7 @@ const PageSubtitle = styled.p`
   color: ${({ theme }) => theme.colors.text.muted};
 `;
 
-/* â”€â”€â”€ Account tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Account tab ───────────────────────────────────────────────── */
 const FormSection = styled.div`
   background: ${({ theme }) => theme.colors.bg.elevated};
   border: 1px solid ${({ theme }) => theme.colors.border.subtle};
@@ -229,7 +229,7 @@ const SaveMsg = styled.p`
   animation: ${fadeUp} 0.2s ease;
 `;
 
-/* â”€â”€â”€ Purchase history tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Purchase history tab ──────────────────────────────────────── */
 const EmptyHistory = styled.div`
   padding: 72px 40px;
   text-align: center;
@@ -305,7 +305,7 @@ const PurchaseQty = styled.span`
   font-size: 0.6rem;
 `;
 
-/* â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Helpers ───────────────────────────────────────────────────── */
 function formatDate(iso) {
   return new Date(iso).toLocaleString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric',
@@ -314,11 +314,11 @@ function formatDate(iso) {
 }
 
 const TABS = [
-  { key: 'account', label: 'Account',          icon: 'ðŸ‘¤' },
-  { key: 'history', label: 'Purchase History',  icon: 'ðŸ›ï¸' },
+  { key: 'account', label: 'Account',          icon: '👤' },
+  { key: 'history', label: 'Purchase History',  icon: '🛍️' },
 ];
 
-/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page ──────────────────────────────────────────────────────── */
 export default function SettingsPage() {
   const { user, profile, loading, updatePlatformUsername } = useAuth();
   const { purchaseHistory } = useCart();
@@ -391,7 +391,7 @@ export default function SettingsPage() {
                       onClick={handleSaveUsername}
                       disabled={saving || !username.trim()}
                     >
-                      {saving ? 'Savingâ€¦' : 'Save'}
+                      {saving ? 'Saving…' : 'Save'}
                     </SaveBtn>
                   </FormRow>
                   <FormHint>Max 30 characters.</FormHint>
@@ -409,7 +409,7 @@ export default function SettingsPage() {
 
                 {purchaseHistory.length === 0 ? (
                   <EmptyHistory>
-                    <EmptyHistoryIcon>ðŸ›ï¸</EmptyHistoryIcon>
+                    <EmptyHistoryIcon>🛍️</EmptyHistoryIcon>
                     <EmptyHistoryText>No purchases yet. Head to the store to get started.</EmptyHistoryText>
                   </EmptyHistory>
                 ) : (
@@ -424,7 +424,7 @@ export default function SettingsPage() {
                           {purchase.items.map((item, i) => (
                             <PurchaseItemChip key={i}>
                               {item.name}
-                              {item.qty > 1 && <PurchaseQty>Ã—{item.qty}</PurchaseQty>}
+                              {item.qty > 1 && <PurchaseQty>×{item.qty}</PurchaseQty>}
                             </PurchaseItemChip>
                           ))}
                         </PurchaseItemsGrid>

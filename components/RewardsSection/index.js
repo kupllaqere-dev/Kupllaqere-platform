@@ -79,8 +79,16 @@ const DailyColumn = styled.div`
 
 const DailyHeader = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: ${({ theme }) => theme.spacing['3']};
+`;
+
+const TitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.spacing['3']};
+  flex: 1;
 `;
 
 const RewardIcon = styled.div`
@@ -110,9 +118,6 @@ const DailySub = styled.div`
 `;
 
 const StreakBadge = styled.div`
-  position: absolute;
-  top: 16px;
-  right: 20px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -123,7 +128,8 @@ const StreakBadge = styled.div`
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
   color: ${({ theme }) => theme.colors.accent.gold};
-  z-index: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
 `;
 
 const RewardBoxRow = styled.div`
@@ -321,8 +327,13 @@ export default function RewardsSection() {
         <DailyColumn>
           <DailyHeader>
             <RewardIcon>🎁</RewardIcon>
-            <div>
-              <DailyTitle>Daily Login Reward</DailyTitle>
+            <div style={{ flex: 1 }}>
+              <TitleRow>
+                <DailyTitle>Daily Login Reward</DailyTitle>
+                {reward && !rewardLoad && (
+                  <StreakBadge>🔥 {reward.streak}-day streak</StreakBadge>
+                )}
+              </TitleRow>
               <DailySub>Consecutive logins grow your streak and your coins!</DailySub>
             </div>
           </DailyHeader>
@@ -338,7 +349,6 @@ export default function RewardsSection() {
             </>
           ) : reward ? (
             <>
-              <StreakBadge>🔥 {reward.streak}-day streak</StreakBadge>
 
               <RewardBoxRow>
                 <RewardBox

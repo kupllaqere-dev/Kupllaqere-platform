@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
@@ -7,13 +7,13 @@ import Footer from '@/components/Footer';
 import { submitTicket } from '@/lib/supportApi';
 import { LETTERBOX_WIDTH } from '@/components/Layout';
 
-/* â”€â”€â”€ Animations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Animations ─────────────────────────────────────────────── */
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* â”€â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Layout ─────────────────────────────────────────────────── */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -36,7 +36,7 @@ const Body = styled.div`
   }
 `;
 
-/* â”€â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Sidebar ────────────────────────────────────────────────── */
 const Sidebar = styled.aside`
   width: 220px;
   flex-shrink: 0;
@@ -108,13 +108,13 @@ const SidebarSubItem = styled.button`
   }
 `;
 
-/* â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Main ───────────────────────────────────────────────────── */
 const Main = styled.main`
   flex: 1;
   min-width: 0;
 `;
 
-/* â”€â”€â”€ Breadcrumbs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Breadcrumbs ────────────────────────────────────────────── */
 const BreadcrumbsNav = styled.nav`
   display: flex;
   align-items: center;
@@ -160,7 +160,7 @@ const BreadcrumbCurrent = styled.span`
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
-/* â”€â”€â”€ Section card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Section card ───────────────────────────────────────────── */
 const Card = styled.div`
   background: ${({ theme }) => theme.colors.bg.surface};
   border: 1px solid ${({ theme }) => theme.colors.border.medium};
@@ -187,7 +187,7 @@ const SectionSubtitle = styled.p`
   margin-bottom: 32px;
 `;
 
-/* â”€â”€â”€ Category grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Category grid ──────────────────────────────────────────── */
 const CategoryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -235,7 +235,7 @@ const CategoryDesc = styled.span`
   line-height: 1.5;
 `;
 
-/* â”€â”€â”€ Ticket form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Ticket form ────────────────────────────────────────────── */
 const TicketFormWrap = styled.div`
   animation: ${fadeIn} 0.2s ease;
 `;
@@ -331,17 +331,17 @@ const ErrorBanner = styled.div`
   animation: ${fadeIn} 0.25s ease;
 `;
 
-/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Data ───────────────────────────────────────────────────── */
 const CATEGORIES = [
-  { key: 'account',   icon: 'ðŸ‘¤', label: 'My Account',       desc: 'Username, password, profile settings, and account access.' },
-  { key: 'bug',       icon: 'ðŸ›', label: 'Bug Reports',      desc: 'Report a bug or unexpected behaviour in the game.' },
-  { key: 'technical', icon: 'âš™ï¸', label: 'Technical Issues', desc: 'Connectivity problems, crashes, or performance issues.' },
-  { key: 'payment',   icon: 'ðŸ’³', label: 'Payment Issues',   desc: 'Billing, refunds, missing currency, or purchase problems.' },
+  { key: 'account',   icon: '👤', label: 'My Account',       desc: 'Username, password, profile settings, and account access.' },
+  { key: 'bug',       icon: '🐛', label: 'Bug Reports',      desc: 'Report a bug or unexpected behaviour in the game.' },
+  { key: 'technical', icon: '⚙️', label: 'Technical Issues', desc: 'Connectivity problems, crashes, or performance issues.' },
+  { key: 'payment',   icon: '💳', label: 'Payment Issues',   desc: 'Billing, refunds, missing currency, or purchase problems.' },
 ];
 
 const MAX_LENGTH = 2000;
 
-/* â”€â”€â”€ Ticket form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Ticket form ────────────────────────────────────────────── */
 function TicketForm({ category, onBack }) {
   const [message, setMessage]       = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -371,7 +371,7 @@ function TicketForm({ category, onBack }) {
 
       <form onSubmit={handleSubmit}>
         <TextArea
-          placeholder={`Describe your ${category.label.toLowerCase()} issue in as much detail as possibleâ€¦`}
+          placeholder={`Describe your ${category.label.toLowerCase()} issue in as much detail as possible…`}
           value={message}
           onChange={e => setMessage(e.target.value.slice(0, MAX_LENGTH))}
           disabled={submitting || submitted}
@@ -380,14 +380,14 @@ function TicketForm({ category, onBack }) {
 
         {submitted && (
           <SuccessBanner>
-            âœ… Your ticket has been submitted. Our support team will get back to you soon.
+            ✅ Your ticket has been submitted. Our support team will get back to you soon.
           </SuccessBanner>
         )}
-        {error && <ErrorBanner>âš ï¸ {error}</ErrorBanner>}
+        {error && <ErrorBanner>⚠️ {error}</ErrorBanner>}
 
         {!submitted && (
           <SubmitBtn type="submit" disabled={!message.trim() || submitting}>
-            {submitting ? 'Sendingâ€¦' : 'Submit Ticket'}
+            {submitting ? 'Sending…' : 'Submit Ticket'}
           </SubmitBtn>
         )}
       </form>
@@ -395,11 +395,11 @@ function TicketForm({ category, onBack }) {
   );
 }
 
-/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page ───────────────────────────────────────────────────── */
 export default function SupportPage() {
   const [activeCategory, setActiveCategory] = useState(null);
 
-  /* â”€â”€ breadcrumbs â”€â”€ */
+  /* ── breadcrumbs ── */
   const crumbs = activeCategory
     ? [
         { label: 'Home',    href: '/' },
@@ -436,7 +436,7 @@ export default function SupportPage() {
           <BreadcrumbsNav aria-label="breadcrumb">
             {crumbs.map((crumb, i) => (
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                {i > 0 && <BreadcrumbSep>â€º</BreadcrumbSep>}
+                {i > 0 && <BreadcrumbSep>›</BreadcrumbSep>}
                 {crumb.href ? (
                   <BreadcrumbLink href={crumb.href}>{crumb.label}</BreadcrumbLink>
                 ) : crumb.onClick ? (

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Header from '@/components/Header';
@@ -11,7 +11,7 @@ const fadeUp = keyframes`
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* â”€â”€â”€ Page shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page shell ────────────────────────────────────────────────── */
 const PageWrap = styled.div`
   min-height: 100vh;
   display: flex;
@@ -46,7 +46,7 @@ const Panel = styled.div`
   }
 `;
 
-/* â”€â”€â”€ Left nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Left nav ──────────────────────────────────────────────────── */
 const Nav = styled.nav`
   width: 220px;
   flex-shrink: 0;
@@ -112,7 +112,7 @@ const NavIcon = styled.span`
   line-height: 1;
 `;
 
-/* â”€â”€â”€ Cart section in nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Cart section in nav ───────────────────────────────────────── */
 const CartSection = styled.div`
   margin-top: auto;
   padding-top: 16px;
@@ -229,7 +229,7 @@ const CheckoutSuccess = styled.div`
   animation: ${fadeUp} 0.25s ease;
 `;
 
-/* â”€â”€â”€ Content area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Content area ──────────────────────────────────────────────── */
 const Content = styled.div`
   flex: 1;
   min-width: 0;
@@ -258,7 +258,7 @@ const PageSubtitle = styled.p`
   color: ${({ theme }) => theme.colors.text.muted};
 `;
 
-/* â”€â”€â”€ In-Game grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── In-Game grid ──────────────────────────────────────────────── */
 const ItemGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -368,7 +368,7 @@ const BuyBtn = styled.button`
   }
 `;
 
-/* â”€â”€â”€ Coming Soon â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Coming Soon ───────────────────────────────────────────────── */
 const ComingSoonWrap = styled.div`
   background: ${({ theme }) => theme.colors.bg.surface};
   border: 1px solid ${({ theme }) => theme.colors.border.medium};
@@ -400,21 +400,21 @@ const ComingSoonText = styled.p`
   line-height: 1.65;
 `;
 
-/* â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Data ──────────────────────────────────────────────────────── */
 const INGAME_ITEMS = [
   { id: 1, name: '100 Lis',  desc: 'A small pouch of Lis to get you started.',       price: 100  },
   { id: 2, name: '200 Lis',  desc: 'Double up your Lis balance in one go.',           price: 200  },
   { id: 3, name: '500 Lis',  desc: 'A solid stack of Lis for serious fashionistas.',  price: 500  },
-  { id: 4, name: '1000 Lis', desc: 'Premium bundle â€” get the most out of FV.',       price: 1000 },
+  { id: 4, name: '1000 Lis', desc: 'Premium bundle — get the most out of FV.',       price: 1000 },
   { id: 5, name: '2000 Lis', desc: 'Ultimate Lis bundle for the true style icon.',   price: 2000 },
 ];
 
 const SECTIONS = [
-  { key: 'ingame',   label: 'In-Game',  icon: 'ðŸŽ®' },
-  { key: 'platform', label: 'Platform', icon: 'ðŸŒ' },
+  { key: 'ingame',   label: 'In-Game',  icon: '🎮' },
+  { key: 'platform', label: 'Platform', icon: '🌐' },
 ];
 
-/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Page ──────────────────────────────────────────────────────── */
 export default function StorePage() {
   const [active, setActive] = useState('ingame');
   const [addedId, setAddedId] = useState(null);
@@ -423,7 +423,7 @@ export default function StorePage() {
 
   const subtitles = {
     ingame:   'Spend your FashionVerse Coins on exclusive in-game items.',
-    platform: 'Platform perks and upgrades â€” coming soon.',
+    platform: 'Platform perks and upgrades — coming soon.',
   };
 
   function handleBuy(item) {
@@ -466,12 +466,12 @@ export default function StorePage() {
                   {cartItems.map(item => (
                     <CartItemRow key={item.id}>
                       <CartItemName>{item.name}</CartItemName>
-                      {item.qty > 1 && <CartItemQty>Ã—{item.qty}</CartItemQty>}
+                      {item.qty > 1 && <CartItemQty>×{item.qty}</CartItemQty>}
                       <CartRemoveBtn
                         onClick={() => removeFromCart(item.id)}
                         aria-label={`Remove ${item.name}`}
                       >
-                        âœ•
+                        ✕
                       </CartRemoveBtn>
                     </CartItemRow>
                   ))}
@@ -479,7 +479,7 @@ export default function StorePage() {
               )}
 
               {checkoutDone ? (
-                <CheckoutSuccess>âœ“ Purchase complete!</CheckoutSuccess>
+                <CheckoutSuccess>✓ Purchase complete!</CheckoutSuccess>
               ) : (
                 <CheckoutBtn
                   $empty={cartItems.length === 0}
@@ -513,7 +513,7 @@ export default function StorePage() {
                             $added={addedId === item.id}
                             onClick={() => handleBuy(item)}
                           >
-                            {addedId === item.id ? 'Added âœ“' : 'Buy'}
+                            {addedId === item.id ? 'Added ✓' : 'Buy'}
                           </BuyBtn>
                         </ItemFooter>
                       </ItemBody>
@@ -533,7 +533,7 @@ export default function StorePage() {
                             $added={addedId === item.id}
                             onClick={() => handleBuy(item)}
                           >
-                            {addedId === item.id ? 'Added âœ“' : 'Buy'}
+                            {addedId === item.id ? 'Added ✓' : 'Buy'}
                           </BuyBtn>
                         </ItemFooter>
                       </ItemBody>
@@ -545,7 +545,7 @@ export default function StorePage() {
 
             {active === 'platform' && (
               <ComingSoonWrap>
-                <ComingSoonIcon>ðŸš§</ComingSoonIcon>
+                <ComingSoonIcon>🚧</ComingSoonIcon>
                 <ComingSoonTitle>Coming Soon</ComingSoonTitle>
                 <ComingSoonText>
                   Platform store items are on the way. Check back soon for exclusive perks, badges, and more.

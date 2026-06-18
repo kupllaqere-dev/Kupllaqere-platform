@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
     background-repeat: no-repeat;
     color: ${({ theme }) => theme.colors.text.primary};
     font-family: ${({ theme }) => theme.typography.fontFamily.base};
-    font-weight: 400;
+    font-weight: 600;
     line-height: ${({ theme }) => theme.typography.lineHeights.normal};
     min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
