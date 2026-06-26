@@ -282,7 +282,7 @@ export default function NewsPage() {
         <Panel>
         <PageHeader>
           <PageTitle>News</PageTitle>
-          <PageSubtitle>Latest updates from the FashionVerse team</PageSubtitle>
+          <PageSubtitle>Latest updates from the Neclis World team</PageSubtitle>
         </PageHeader>
 
         <ArticleList>

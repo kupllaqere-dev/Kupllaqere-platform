@@ -9,6 +9,8 @@ import { createNews } from '@/lib/newsApi';
 import { createCompetition } from '@/lib/competitionsApi';
 import { fetchTickets, replyToTicket, updateTicketStatus } from '@/lib/supportApi';
 import { fetchCodes, createCode, toggleCode } from '@/lib/codesApi';
+import { fetchReports, resolveReport, deletePost, deleteReply } from '@/lib/forumApi';
+import Link from 'next/link';
 
 /* ─── Animations ─────────────────────────────────────────────── */
 const fadeIn = keyframes`
@@ -1238,12 +1240,303 @@ function CodesSection() {
   );
 }
 
+/* ─── Reports section styled components ─────────────────────── */
+const ReportList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ReportFilterRow = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+`;
+
+const FilterChip = styled.button`
+  padding: 6px 16px;
+  border-radius: ${({ theme }) => theme.radii.full};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  border: 1px solid ${({ $active, theme }) => $active ? theme.colors.border.accent : theme.colors.border.default};
+  background: ${({ $active, theme }) => $active ? theme.colors.accent.violetAlpha : 'transparent'};
+  color: ${({ $active, theme }) => $active ? theme.colors.text.primary : theme.colors.text.muted};
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.transitions.fast};
+  &:hover { border-color: ${({ theme }) => theme.colors.border.accent}; color: ${({ theme }) => theme.colors.text.primary}; }
+`;
+
+const ReportCard = styled.div`
+  border-radius: ${({ theme }) => theme.radii.xl};
+  background: ${({ theme }) => theme.colors.bg.elevated};
+  border: 1px solid ${({ $resolved, theme }) => $resolved ? theme.colors.border.subtle : theme.colors.border.default};
+  padding: 16px 20px;
+  opacity: ${({ $resolved }) => $resolved ? 0.6 : 1};
+  transition: opacity ${({ theme }) => theme.transitions.fast};
+`;
+
+const ReportCardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+`;
+
+const ReportTypeBadge = styled.span`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  padding: 3px 10px;
+  border-radius: ${({ theme }) => theme.radii.full};
+  background: ${({ $post, theme }) => $post ? theme.colors.accent.violetAlpha : 'rgba(232,184,74,0.12)'};
+  color: ${({ $post, theme }) => $post ? theme.colors.accent.violetLight : theme.colors.accent.gold};
+  border: 1px solid ${({ $post }) => $post ? 'rgba(124,58,237,0.3)' : 'rgba(232,184,74,0.3)'};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+const ReportAuthor = styled.span`
+  font-size: ${({ theme }) => theme.typography.sizes.sm};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const ReportDate = styled.span`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  color: ${({ theme }) => theme.colors.text.muted};
+  margin-left: auto;
+`;
+
+const ReportContent = styled.p`
+  font-size: ${({ theme }) => theme.typography.sizes.sm};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  line-height: 1.6;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+const ReportReason = styled.p`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  color: ${({ theme }) => theme.colors.text.muted};
+  margin-bottom: 12px;
+  font-style: italic;
+`;
+
+const ReportActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+`;
+
+const ViewThreadBtn = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.accent.violetLight};
+  background: ${({ theme }) => theme.colors.accent.violetAlpha};
+  border: 1px solid rgba(124,58,237,0.3);
+  text-decoration: none;
+  transition: all ${({ theme }) => theme.transitions.fast};
+  &:hover { opacity: 0.8; }
+`;
+
+const ResolveBtn = styled.button`
+  padding: 6px 14px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.accent.emerald};
+  background: ${({ theme }) => theme.colors.accent.emeraldAlpha};
+  border: 1px solid rgba(74,173,106,0.3);
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.transitions.fast};
+  &:hover:not(:disabled) { opacity: 0.8; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+`;
+
+const DeleteContentBtn = styled.button`
+  padding: 6px 14px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.accent.rose};
+  background: rgba(196,64,64,0.08);
+  border: 1px solid rgba(196,64,64,0.3);
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.transitions.fast};
+  &:hover:not(:disabled) { background: rgba(196,64,64,0.18); }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+`;
+
+const ResolvedPill = styled.span`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  color: ${({ theme }) => theme.colors.text.muted};
+  padding: 3px 10px;
+  border-radius: ${({ theme }) => theme.radii.full};
+  background: rgba(255,255,255,0.04);
+  border: 1px solid transparent;
+`;
+
+/* ─── Reports section component ──────────────────────────────── */
+function ReportsSection() {
+  const [reports, setReports]     = useState([]);
+  const [loading, setLoading]     = useState(true);
+  const [error, setError]         = useState(null);
+  const [filter, setFilter]       = useState('unresolved');
+  const [resolving, setResolving] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+
+  useEffect(() => {
+    fetchReports()
+      .then(data => { setReports(data); setLoading(false); })
+      .catch(err  => { setError(err.message); setLoading(false); });
+  }, []);
+
+  async function handleResolve(report) {
+    setResolving(report.id);
+    try {
+      const updated = await resolveReport(report.id);
+      setReports(prev => prev.map(r => r.id === updated.id ? updated : r));
+    } catch { /* ignore */ }
+    finally { setResolving(null); }
+  }
+
+  async function handleDeleteContent(report) {
+    setDeletingId(report.id);
+    try {
+      if (report.post_id) {
+        await deletePost(report.post_id);
+      } else {
+        await deleteReply(report.reply_id);
+      }
+      await resolveReport(report.id);
+      setReports(prev => prev.map(r =>
+        r.id === report.id ? { ...r, resolved: true } : r
+      ));
+    } catch { /* ignore */ }
+    finally { setDeletingId(null); setConfirmDelete(null); }
+  }
+
+  function formatDate(iso) {
+    return new Date(iso).toLocaleDateString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit',
+    });
+  }
+
+  const visible = reports.filter(r =>
+    filter === 'all'        ? true :
+    filter === 'unresolved' ? !r.resolved :
+    r.resolved
+  );
+
+  return (
+    <FormCard>
+      <FormTitle>Forum Reports</FormTitle>
+      <FormSubtitle>Review reported posts and replies from players.</FormSubtitle>
+
+      <ReportFilterRow>
+        {[
+          { key: 'unresolved', label: `Unresolved (${reports.filter(r => !r.resolved).length})` },
+          { key: 'resolved',   label: 'Resolved' },
+          { key: 'all',        label: 'All' },
+        ].map(f => (
+          <FilterChip key={f.key} $active={filter === f.key} onClick={() => setFilter(f.key)}>
+            {f.label}
+          </FilterChip>
+        ))}
+      </ReportFilterRow>
+
+      {loading && <EmptyTickets>Loading reports…</EmptyTickets>}
+      {!loading && error && <EmptyTickets>⚠️ {error}</EmptyTickets>}
+      {!loading && !error && visible.length === 0 && (
+        <EmptyTickets>No {filter !== 'all' ? filter : ''} reports.</EmptyTickets>
+      )}
+
+      {!loading && !error && visible.length > 0 && (
+        <ReportList>
+          {visible.map(report => {
+            const isPost  = !!report.post_id;
+            const threadId = report.thread_post_id;
+
+            return (
+              <ReportCard key={report.id} $resolved={report.resolved}>
+                <ReportCardHeader>
+                  <ReportTypeBadge $post={isPost}>{isPost ? 'Post' : 'Reply'}</ReportTypeBadge>
+                  <ReportAuthor>{report.author_name}</ReportAuthor>
+                  <ReportDate>{formatDate(report.created_at)}</ReportDate>
+                </ReportCardHeader>
+
+                <ReportContent>"{report.content}"</ReportContent>
+
+                {report.reason && (
+                  <ReportReason>Reason: {report.reason}</ReportReason>
+                )}
+
+                <ReportActions>
+                  {threadId && (
+                    <ViewThreadBtn href={`/forums/${threadId}`} target="_blank" rel="noopener noreferrer">
+                      View Thread →
+                    </ViewThreadBtn>
+                  )}
+
+                  {!report.resolved && (
+                    <>
+                      {confirmDelete?.id === report.id ? (
+                        <>
+                          <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Delete content?</span>
+                          <DeleteContentBtn
+                            onClick={() => handleDeleteContent(report)}
+                            disabled={deletingId === report.id}
+                          >
+                            {deletingId === report.id ? 'Deleting…' : 'Confirm'}
+                          </DeleteContentBtn>
+                          <ResolveBtn onClick={() => setConfirmDelete(null)}>Cancel</ResolveBtn>
+                        </>
+                      ) : (
+                        <>
+                          <ResolveBtn
+                            onClick={() => handleResolve(report)}
+                            disabled={resolving === report.id}
+                          >
+                            {resolving === report.id ? 'Resolving…' : '✓ Resolve'}
+                          </ResolveBtn>
+                          <DeleteContentBtn onClick={() => setConfirmDelete(report)}>
+                            ✕ Delete Content
+                          </DeleteContentBtn>
+                        </>
+                      )}
+                    </>
+                  )}
+
+                  {report.resolved && <ResolvedPill>Resolved</ResolvedPill>}
+                </ReportActions>
+              </ReportCard>
+            );
+          })}
+        </ReportList>
+      )}
+    </FormCard>
+  );
+}
+
 /* ─── Sidebar items ──────────────────────────────────────────── */
 const SECTIONS = [
   { key: 'news',         label: '📰 News' },
   { key: 'competitions', label: '🏆 Competitions' },
   { key: 'support',      label: '🎧 Support' },
   { key: 'codes',        label: '🎟 Codes' },
+  { key: 'reports',      label: '⚑ Reports' },
 ];
 
 /* ─── Page ───────────────────────────────────────────────────── */
@@ -1290,6 +1583,7 @@ export default function AdminPage() {
           {section === 'competitions' && <CompetitionsForm />}
           {section === 'support'      && <SupportSection />}
           {section === 'codes'        && <CodesSection />}
+          {section === 'reports'      && <ReportsSection />}
         </Main>
       </Body>
       <Footer />

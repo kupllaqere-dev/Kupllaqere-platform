@@ -11,7 +11,7 @@ import Avatar from '@/components/ui/Avatar';
 import Badge from '@/components/ui/Badge';
 import { PrimaryButton, GhostButton } from '@/components/ui/Button';
 import { useAuth } from '@/features/auth/AuthProvider';
-import { fetchThread, createReply } from '@/lib/forumApi';
+import { fetchThread, createReply, reportPost, reportReply, deletePost, deleteReply } from '@/lib/forumApi';
 
 const AVATAR_COLORS = ['#c87941','#2aac8e','#c44040','#e8b84a','#4aad6a','#4aad6a','#e09a58','#4ec9a8'];
 
@@ -218,6 +218,76 @@ const InlineReplyBtn = styled.button`
   &:hover { color: ${({ theme }) => theme.colors.accent.violetLight}; }
 `;
 
+const ReportBtn = styled.button`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.text.muted};
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  margin-left: ${({ theme }) => theme.spacing['3']};
+  transition: color ${({ theme }) => theme.transitions.fast};
+  &:hover { color: ${({ theme }) => theme.colors.accent.rose}; }
+  &:disabled { opacity: 0.5; cursor: default; }
+`;
+
+const DeleteBtn = styled.button`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  color: ${({ theme }) => theme.colors.accent.rose};
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  margin-left: ${({ theme }) => theme.spacing['3']};
+  transition: opacity ${({ theme }) => theme.transitions.fast};
+  &:hover:not(:disabled) { opacity: 0.7; }
+  &:disabled { opacity: 0.4; cursor: default; }
+`;
+
+const ConfirmRow = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: ${({ theme }) => theme.spacing['3']};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  color: ${({ theme }) => theme.colors.text.muted};
+`;
+
+const ConfirmBtn = styled.button`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  font-weight: ${({ theme }) => theme.typography.weights.semibold};
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  color: ${({ $danger, theme }) => $danger ? theme.colors.accent.rose : theme.colors.text.muted};
+  &:hover { opacity: 0.8; }
+`;
+
+const ReportFormCard = styled(GlassCard)`
+  padding: ${({ theme }) => theme.spacing['3']} ${({ theme }) => theme.spacing['4']};
+  margin-top: ${({ theme }) => theme.spacing['2']};
+`;
+
+const ReportedBadge = styled.span`
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+  color: ${({ theme }) => theme.colors.accent.rose};
+  margin-left: ${({ theme }) => theme.spacing['3']};
+  opacity: 0.8;
+`;
+
+const PostActionRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${({ theme }) => theme.spacing['4']};
+  padding-top: ${({ theme }) => theme.spacing['3']};
+  border-top: 1px solid ${({ theme }) => theme.colors.border.subtle};
+  flex-wrap: wrap;
+  gap: 4px;
+`;
+
 /* Wraps all children + inline form for a reply, adding the thread line */
 const NestedGroup = styled.div`
   margin-top: ${({ theme }) => theme.spacing['2']};
@@ -358,7 +428,8 @@ function InlineReplyForm({ replyingToName, onSubmit, onCancel, submitting, error
 
 export default function ForumThread() {
   const { id }   = useParams();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
+  const isAdmin = profile?.role === 'admin';
 
   const [post, setPost]         = useState(null);
   const [replies, setReplies]   = useState([]);
@@ -372,6 +443,17 @@ export default function ForumThread() {
   const [activeInlineReply, setActiveInlineReply] = useState(null);
   const [inlineSubmitting, setInlineSubmitting]   = useState(false);
   const [inlineError, setInlineError]             = useState('');
+
+  // Report state: { type: 'post'|'reply', id } | null
+  const [reportTarget, setReportTarget]       = useState(null);
+  const [reportReason, setReportReason]       = useState('');
+  const [reportSubmitting, setReportSubmitting] = useState(false);
+  const [reportError, setReportError]         = useState('');
+  const [reportedIds, setReportedIds]         = useState(new Set());
+
+  // Delete state
+  const [deleteConfirm, setDeleteConfirm]   = useState(null); // { type, id }
+  const [deleting, setDeleting]             = useState(false);
 
   const bottomRef = useRef(null);
 
@@ -416,6 +498,53 @@ export default function ForumThread() {
     }
   }
 
+  async function handleReport(e) {
+    e.preventDefault();
+    if (!reportTarget) return;
+    setReportSubmitting(true);
+    setReportError('');
+    try {
+      if (reportTarget.type === 'post') {
+        await reportPost(reportTarget.id, reportReason);
+      } else {
+        await reportReply(reportTarget.id, reportReason);
+      }
+      setReportedIds(prev => new Set(prev).add(reportTarget.id));
+      setReportTarget(null);
+      setReportReason('');
+    } catch (err) {
+      setReportError(err.message || 'Failed to submit report.');
+    } finally {
+      setReportSubmitting(false);
+    }
+  }
+
+  function cancelReport() {
+    setReportTarget(null);
+    setReportReason('');
+    setReportError('');
+  }
+
+  async function handleDelete(type, targetId) {
+    setDeleting(true);
+    try {
+      if (type === 'post') {
+        await deletePost(targetId);
+        setPost(null);
+        setNotFound(true);
+      } else {
+        await deleteReply(targetId);
+        setReplies(prev => prev.filter(r => r.id !== targetId));
+        setPost(prev => prev ? { ...prev, reply_count: Math.max(0, prev.reply_count - 1) } : prev);
+      }
+      setDeleteConfirm(null);
+    } catch {
+      // silently ignore — the UI stays as-is
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   // Recursive render — no depth limit
   function renderReply(node) {
     const isReplying = activeInlineReply === node.id;
@@ -445,7 +574,51 @@ export default function ForumThread() {
                 >
                   ↩ Reply
                 </InlineReplyBtn>
+
+                {reportedIds.has(node.id) ? (
+                  <ReportedBadge>Reported</ReportedBadge>
+                ) : reportTarget?.id === node.id ? null : (
+                  <ReportBtn onClick={() => { setReportTarget({ type: 'reply', id: node.id }); setReportReason(''); setReportError(''); }}>
+                    ⚑ Report
+                  </ReportBtn>
+                )}
+
+                {isAdmin && (
+                  deleteConfirm?.id === node.id ? (
+                    <ConfirmRow>
+                      Delete?
+                      <ConfirmBtn $danger onClick={() => handleDelete('reply', node.id)} disabled={deleting}>Yes</ConfirmBtn>
+                      <ConfirmBtn onClick={() => setDeleteConfirm(null)}>No</ConfirmBtn>
+                    </ConfirmRow>
+                  ) : (
+                    <DeleteBtn onClick={() => setDeleteConfirm({ type: 'reply', id: node.id })}>
+                      ✕ Delete
+                    </DeleteBtn>
+                  )
+                )}
               </ReplyActionRow>
+            )}
+
+            {reportTarget?.id === node.id && (
+              <ReportFormCard>
+                <form onSubmit={handleReport}>
+                  <Textarea
+                    $small
+                    value={reportReason}
+                    onChange={e => setReportReason(e.target.value)}
+                    placeholder="Reason for reporting (optional)…"
+                    maxLength={500}
+                    autoFocus
+                  />
+                  {reportError && <ErrorText>{reportError}</ErrorText>}
+                  <FormActions>
+                    <GhostButton type="button" size="sm" onClick={cancelReport}>Cancel</GhostButton>
+                    <PrimaryButton type="submit" size="sm" disabled={reportSubmitting}>
+                      {reportSubmitting ? 'Submitting…' : 'Submit Report'}
+                    </PrimaryButton>
+                  </FormActions>
+                </form>
+              </ReportFormCard>
             )}
           </ReplyContent>
         </ReplyCard>
@@ -507,6 +680,54 @@ export default function ForumThread() {
                   </div>
                 </PostAuthorRow>
                 <PostBody>{post.body}</PostBody>
+
+                {user && (
+                  <PostActionRow>
+                    {reportedIds.has(post.id) ? (
+                      <ReportedBadge>Reported</ReportedBadge>
+                    ) : reportTarget?.id === post.id ? null : (
+                      <ReportBtn onClick={() => { setReportTarget({ type: 'post', id: post.id }); setReportReason(''); setReportError(''); }}>
+                        ⚑ Report Post
+                      </ReportBtn>
+                    )}
+
+                    {isAdmin && (
+                      deleteConfirm?.id === post.id ? (
+                        <ConfirmRow>
+                          Delete entire thread?
+                          <ConfirmBtn $danger onClick={() => handleDelete('post', post.id)} disabled={deleting}>Yes</ConfirmBtn>
+                          <ConfirmBtn onClick={() => setDeleteConfirm(null)}>No</ConfirmBtn>
+                        </ConfirmRow>
+                      ) : (
+                        <DeleteBtn onClick={() => setDeleteConfirm({ type: 'post', id: post.id })}>
+                          ✕ Delete Thread
+                        </DeleteBtn>
+                      )
+                    )}
+                  </PostActionRow>
+                )}
+
+                {reportTarget?.id === post.id && (
+                  <ReportFormCard>
+                    <form onSubmit={handleReport}>
+                      <Textarea
+                        $small
+                        value={reportReason}
+                        onChange={e => setReportReason(e.target.value)}
+                        placeholder="Reason for reporting (optional)…"
+                        maxLength={500}
+                        autoFocus
+                      />
+                      {reportError && <ErrorText>{reportError}</ErrorText>}
+                      <FormActions>
+                        <GhostButton type="button" size="sm" onClick={cancelReport}>Cancel</GhostButton>
+                        <PrimaryButton type="submit" size="sm" disabled={reportSubmitting}>
+                          {reportSubmitting ? 'Submitting…' : 'Submit Report'}
+                        </PrimaryButton>
+                      </FormActions>
+                    </form>
+                  </ReportFormCard>
+                )}
               </PostCard>
 
               <RepliesHeader>

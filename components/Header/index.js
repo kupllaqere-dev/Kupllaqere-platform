@@ -708,8 +708,8 @@ export default function Header() {
 
           {/* ── Centre logo ── */}
           <MobileLogoWrap>
-            <LogoWrap href="/" aria-label="FashionVerse home">
-              <LogoImg src="/logo.png" alt="FashionVerse" />
+            <LogoWrap href="/" aria-label="Neclis World home">
+              <LogoImg src="/logo.png" alt="Neclis World" />
             </LogoWrap>
           </MobileLogoWrap>
 

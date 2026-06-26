@@ -148,7 +148,7 @@ export default function SetupUsernamePage() {
         <Card>
           <Title>Pick a username</Title>
           <Subtitle>
-            Your game account is linked. Now choose a username for the FashionVerse platform — this is separate from your in-game character name.
+            Your game account is linked. Now choose a username for the Neclis World platform — this is separate from your in-game character name.
           </Subtitle>
 
           <Form onSubmit={handleSubmit}>

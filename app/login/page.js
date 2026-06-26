@@ -140,7 +140,7 @@ export default function LoginPage() {
       <Page>
         <Card>
           <Title>Welcome back</Title>
-          <Subtitle>Sign in with your FashionVerse account — the same one you use in the game.</Subtitle>
+          <Subtitle>Sign in with your Neclis World account — the same one you use in the game.</Subtitle>
 
           <Form onSubmit={handleSubmit}>
             <Field>

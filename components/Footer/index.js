@@ -390,8 +390,8 @@ const quickLinks = [
 
 const faqs = [
   {
-    q: 'Is FashionVerse free to play?',
-    a: 'Yes — FashionVerse is completely free to play in your browser. Premium cosmetic items are available in the shop, but the full game experience requires no purchase.',
+    q: 'Is Neclis World free to play?',
+    a: 'Yes — Neclis World is completely free to play in your browser. Premium cosmetic items are available in the shop, but the full game experience requires no purchase.',
   },
   {
     q: 'How do I join a clan?',
@@ -414,7 +414,7 @@ const faqs = [
 const socials = [
   {
     name: 'Discord',
-    handle: 'discord.gg/fashionverse',
+    handle: 'discord.gg/Neclis World',
     icon: '💬',
     bg: 'linear-gradient(135deg, #5865f2, #7289da)',
     color: '#5865f2',
@@ -422,7 +422,7 @@ const socials = [
   },
   {
     name: 'X / Twitter',
-    handle: '@FashionVerseGame',
+    handle: '@Neclis WorldGame',
     icon: '✕',
     bg: 'linear-gradient(135deg, #1a1a1a, #333)',
     color: '#94a3b8',
@@ -430,7 +430,7 @@ const socials = [
   },
   {
     name: 'TikTok',
-    handle: '@fashionverse',
+    handle: '@Neclis World',
     icon: '▶',
     bg: 'linear-gradient(135deg, #010101, #69c9d0)',
     color: '#69c9d0',
@@ -438,7 +438,7 @@ const socials = [
   },
   {
     name: 'Instagram',
-    handle: '@fashionverse.game',
+    handle: '@Neclis World.game',
     icon: '📸',
     bg: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)',
     color: '#fd1d1d',
@@ -446,7 +446,7 @@ const socials = [
   },
   {
     name: 'YouTube',
-    handle: 'FashionVerse Official',
+    handle: 'Neclis World Official',
     icon: '▶',
     bg: 'linear-gradient(135deg, #ff0000, #cc0000)',
     color: '#ff0000',
@@ -468,11 +468,11 @@ export default function Footer() {
           <BrandCol>
             <LogoRow href="/">
               <LogoMark>✦</LogoMark>
-              <LogoText>FashionVerse</LogoText>
+              <LogoText>Neclis World</LogoText>
             </LogoRow>
 
             <Description>
-              FashionVerse is the ultimate browser-based multiplayer dress-up and
+              Neclis World is the ultimate browser-based multiplayer dress-up and
               social gaming community. Design stunning looks, compete in weekly
               fashion events, build your crew, and rise through the style
               rankings — all for free, right in your browser.
@@ -549,7 +549,7 @@ export default function Footer() {
       {/* Bottom bar — outside FooterInner so it spans the full width container */}
       <BottomBar>
         <Copyright>
-          © 2026 FashionVerse. All rights reserved. Built with{' '}
+          © 2026 Neclis World. All rights reserved. Built with{' '}
           <a href="#">Next.js</a> &amp; <a href="#">Styled Components</a>.
         </Copyright>
         <MadeWith>Made with <span>♥</span> for the community</MadeWith>

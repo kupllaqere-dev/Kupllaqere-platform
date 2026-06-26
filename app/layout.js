@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: 'FashionVerse — Dress-Up & Social Gaming Community',
+  title: 'Neclis World — Dress-Up & Social Gaming Community',
   description:
     'Join millions of players in the ultimate browser-based dress-up and social gaming experience. Design outfits, compete in events, join clans, and show off your style.',
   keywords: 'dress up game, fashion game, multiplayer, community, browser game',

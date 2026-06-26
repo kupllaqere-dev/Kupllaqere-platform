@@ -447,7 +447,7 @@ export default function ProfilePage() {
               {!hasCharacter && (
                 <NoCharCard>
                   <NoCharTitle>No character linked</NoCharTitle>
-                  <NoCharSub>Launch FashionVerse and complete the setup to link your character here.</NoCharSub>
+                  <NoCharSub>Launch Neclis World and complete the setup to link your character here.</NoCharSub>
                 </NoCharCard>
               )}
             </ProfileTop>

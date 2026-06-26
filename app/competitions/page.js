@@ -316,7 +316,7 @@ export default function CompetitionsPage() {
         <Panel>
         <PageHeader>
           <PageTitle>Competitions</PageTitle>
-          <PageSubtitle>Fashion competitions hosted by the FashionVerse team</PageSubtitle>
+          <PageSubtitle>Fashion competitions hosted by the Neclis World team</PageSubtitle>
         </PageHeader>
 
         <CompList>

@@ -422,7 +422,7 @@ export default function StorePage() {
   const { cartItems, totalItems, addToCart, removeFromCart, checkout } = useCart();
 
   const subtitles = {
-    ingame:   'Spend your FashionVerse Coins on exclusive in-game items.',
+    ingame:   'Spend your Neclis World Coins on exclusive in-game items.',
     platform: 'Platform perks and upgrades — coming soon.',
   };
 
